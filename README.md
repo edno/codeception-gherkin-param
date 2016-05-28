@@ -4,7 +4,7 @@
 [![Build Status](https://img.shields.io/travis/edno/codeception-gherkin-param.svg?style=flat-square)]()
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/master/LICENSE)
 
-The [Codeception](http://codeception.com/) for supporting parameter notation
+The [Codeception](http://codeception.com/) extension for supporting parameter notation
 in [Gherkin](https://github.com/Codeception/Codeception/blob/2.2-docs/docs/07-BDD.md)
 scenario.
 
