@@ -32,10 +32,10 @@ extensions:
 ```
 
 ## Usage
-Once installed you will be able to access variable stored using 
-[Fixtures](http://codeception.com/docs/reference/Fixtures).
-In your steps parameters can be accessed using the syntax `{{param}}`. 
-While executing your features the parameters will be automatically replaced by their value.
+Once installed you will be able to access variables stored using 
+[Fixtures](http://codeception.com/docs/reference/Fixtures).  
+In scenario steps, the variables can be accessed using the syntax `{{param}}`.  
+While executing your features the variables will be automatically replaced by their value.
 
 ### Example
 ```gherkin
@@ -61,9 +61,9 @@ The steps definition in `AcceptanceTester.php` do not require any change
 /**
  * @Then I should see :arg1 equals :arg2
  */
-public function iSeeEqual($arg1, $arg2)
-{
-  $this->assertEquals($arg1, $arg2);
-}
+ public function iSeeEqual($arg1, $arg2)
+ {
+   $this->assertEquals($arg1, $arg2);
+ }
 ```
  You can find more examples in the [test folder](https://github.com/edno/codeception-gherkin-param/tree/master/tests/acceptance).
