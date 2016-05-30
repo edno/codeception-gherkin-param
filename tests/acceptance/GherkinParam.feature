@@ -23,3 +23,15 @@ Feature: Parametrize Gherkin Feature
     Examples:
       | parameter | value |
       | param     | 1010  |
+
+  Scenario: Scenario using table in helper
+    Given I have a parameter "test" with value "Tabe Node"
+    When I have
+        | parameter | value      |
+        | param1    | Fix Helper |
+        | param2    | {{test}}   |
+    Then I should see "{{param2}}" equals "{{test}}"
+
+  Scenario: Scenario using JSON string
+    Given I have a parameter "test" with value "{'value': 42}"
+    Then I should see "{{test}}" equals "{'value': 42}"

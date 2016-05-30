@@ -48,5 +48,4 @@ class AcceptanceTester extends \Codeception\Actor
           $this->assertEquals($row[0], $row[1]);
         }
       }
-
 }

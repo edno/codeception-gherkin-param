@@ -59,11 +59,12 @@ class GherkinParam extends \Codeception\Platform\Extension
       //  | paramater |
       //  | {{param}} |
         $table = Array();
-        foreach ($arg->getRows() as $index => $cell) {
-          $row[$index] = $this->getValueFromParam($cell);
-          $table = array_merge($table, $row);
+        foreach ($arg->getRows() as $i => $row) {
+          foreach ($row as $j => $cell) {
+              $table[$i][$j] = $this->getValueFromParam($cell);
+          }
         }
-        $arg = new TableNode($table);
+        $args[$index] = new TableNode($table);
       }
     }
     // set new arguments value

@@ -9,3 +9,4 @@ class_name: AcceptanceTester
 modules:
   enabled:
     - Asserts
+    - Helper\Acceptance
