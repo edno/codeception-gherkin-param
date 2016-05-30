@@ -1,7 +1,7 @@
 # Gherkin Param
 
 [![Latest Version](https://img.shields.io/packagist/v/edno/codeception-gherkin-param.svg?style=flat-square)](https://packagist.org/packages/edno/codeception-gherkin-param)
-[![Build Status](https://img.shields.io/travis/edno/codeception-gherkin-param.svg?style=flat-square)]()
+[![Build Status](https://img.shields.io/travis/edno/codeception-gherkin-param.svg?style=flat-square)](https://travis-ci.org/edno/codeception-gherkin-param)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/master/LICENSE)
 
 The [Codeception](http://codeception.com/) extension for supporting parameter notation
