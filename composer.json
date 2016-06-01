@@ -3,20 +3,20 @@
   "description": "Codeception extension for supporting parameter notation in Gherkin features",
   "keywords": ["codeception", "extension", "gherkin"],
   "homepage": "https://github.com/edno/codeception-gherkin-param",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "authors": [
       {
-          "name": "Greg Heitz",
-          "email": "edno_gh@yahoo.fr"
+        "name": "Greg Heitz",
+        "email": "edno_gh@yahoo.fr"
       }
   ],
   "require": {
     "php": ">=5.4",
-		"codeception/codeception": "^2.2"
+	"codeception/codeception": "^2.2"
   },
   "autoload": {
     "psr-4": {
-			"Codeception\\Extension\\": "src/"
+	"Codeception\\Extension\\": "src/"
     }
   },
   "config": {
