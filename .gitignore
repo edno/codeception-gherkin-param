@@ -6,4 +6,7 @@ composer.phar
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 composer.lock
 
-tests/_output/*
+# OSX Desktop Services Store files
+.DS_Store
+# Windows thumbnails cache files
+Thumbs.db
