@@ -25,8 +25,8 @@ Feature: Parametrize Gherkin Feature
       | param     | 1010  |
 
   Scenario: Scenario using table in helper
-    Given I have a parameter "test" with value "Tabe Node"
-    When I have
+    Given I have a parameter "test" with value "Table Node"
+    When I have parameters
         | parameter | value      |
         | param1    | Fix Helper |
         | param2    | {{test}}   |

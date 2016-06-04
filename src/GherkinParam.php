@@ -21,10 +21,10 @@ class GherkinParam extends \Codeception\Platform\Extension
 		'step.before' => 'beforeStep'
   );
 
-	public function __construct($config, $options)
+  public function __construct($config, $options)
   {
     parent::__construct($config, $options);
-	}
+  }
 
   // parse param and replace {{.*}} by its Fixtures::get() value if exists
   protected function getValueFromParam($param)
@@ -70,4 +70,5 @@ class GherkinParam extends \Codeception\Platform\Extension
     // set new arguments value
     $refArgs->setValue($step, $args);
   }
+
 }

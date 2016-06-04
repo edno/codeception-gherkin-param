@@ -7,7 +7,7 @@ use Codeception\Util\Fixtures;
 class Acceptance extends \Codeception\Module
 {
     /**
-     * @When /I have (parameters)?/
+     * @When /I have parameters/
      */
      public function iHaveParams(TableNode $table)
      {
