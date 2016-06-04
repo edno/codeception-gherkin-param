@@ -1,6 +1,7 @@
 # Gherkin Param
 
 [![Latest Version](https://img.shields.io/packagist/v/edno/codeception-gherkin-param.svg?style=flat-square)](https://packagist.org/packages/edno/codeception-gherkin-param)
+[![Dependency Status](https://www.versioneye.com/user/projects/575311c77757a0003bd4af43/badge.svg?style=flat)](https://www.versioneye.com/user/projects/575311c77757a0003bd4af43)
 [![Build Status](https://img.shields.io/travis/edno/codeception-gherkin-param.svg?style=flat-square)](https://travis-ci.org/edno/codeception-gherkin-param)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/ae1cb40a-a1de-4a31-a572-3bc85e2f2d99.svg?style=flat-square)](https://insight.sensiolabs.com/projects/ae1cb40a-a1de-4a31-a572-3bc85e2f2d99)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/edno/codeception-gherkin-param.svg?style=flat-square)](https://scrutinizer-ci.com/g/edno/codeception-gherkin-param/?branch=master)
