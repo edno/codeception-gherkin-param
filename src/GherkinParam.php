@@ -20,12 +20,7 @@ class GherkinParam extends \Codeception\Platform\Extension
 		//run before any steps
 		'step.before' => 'beforeStep'
   );
-
-  public function __construct($config, $options)
-  {
-    parent::__construct($config, $options);
-  }
-
+  
   // parse param and replace {{.*}} by its Fixtures::get() value if exists
   protected function getValueFromParam($param)
   {

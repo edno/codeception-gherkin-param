@@ -14,4 +14,7 @@ before_script:
   - composer install
 
 script:
- - ./vendor/bin/codecept run
+ - ./vendor/bin/codecept run --coverage-xml
+
+ after_script:
+  - ./vendor/bin/coveralls

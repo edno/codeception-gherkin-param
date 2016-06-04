@@ -3,6 +3,7 @@
 [![Latest Version](https://img.shields.io/packagist/v/edno/codeception-gherkin-param.svg?style=flat-square)](https://packagist.org/packages/edno/codeception-gherkin-param)
 [![Build Status](https://img.shields.io/travis/edno/codeception-gherkin-param.svg?style=flat-square)](https://travis-ci.org/edno/codeception-gherkin-param)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/ae1cb40a-a1de-4a31-a572-3bc85e2f2d99.svg?style=flat-square)](https://insight.sensiolabs.com/projects/ae1cb40a-a1de-4a31-a572-3bc85e2f2d99)
+[![Coverage Status](https://img.shields.io/coveralls/edno/codeception-gherkin-param.svg?style=flat-square)](https://coveralls.io/github/edno/codeception-gherkin-param?branch=master)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/master/LICENSE)
 
 The [Codeception](http://codeception.com/) extension for supporting parameter notation
@@ -14,7 +15,7 @@ scenario.
 - Codeception 2.2
 - PHP 5.4
 
-## Installation 
+## Installation
 The extension can be installed using [Composer](https://getcomposer.org)
 
 ```bash
@@ -33,7 +34,7 @@ extensions:
 ```
 
 ## Usage
-Once installed you will be able to access variables stored using 
+Once installed you will be able to access variables stored using
 [Fixtures](http://codeception.com/docs/reference/Fixtures).  
 In scenario steps, the variables can be accessed using the syntax `{{param}}`.  
 While executing your features the variables will be automatically replaced by their value.
