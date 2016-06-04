@@ -16,5 +16,5 @@ before_script:
 script:
  - ./vendor/bin/codecept run --coverage-xml
 
- after_script:
+after_script:
   - ./vendor/bin/coveralls
