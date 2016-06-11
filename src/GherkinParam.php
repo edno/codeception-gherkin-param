@@ -9,7 +9,6 @@
  */
 namespace Codeception\Extension;
 
-use RuntimeException;
 use Codeception\Util\Fixtures;
 use Behat\Gherkin\Node\TableNode;
 use ReflectionProperty;
@@ -51,7 +50,7 @@ class GherkinParam extends \Codeception\Platform\Extension
   {
     $value = null;
     $config = static::$suite_config;
-    
+
     preg_match_all(static::$regEx['config'], $param, $args, PREG_PATTERN_ORDER);
     foreach ($args[1] as $arg) {
       while (array_key_exists($arg, $config)) {
