@@ -76,8 +76,6 @@ class GherkinParam extends \Codeception\Platform\Extension
     $array = Fixtures::get($args['var'][0]);
     if (array_key_exists($args['key'][0], $array)) {
         $value = $array[$args['key'][0]];
-    } else {
-      return null;
     }
     return $value;
   }
