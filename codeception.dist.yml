@@ -1,0 +1,27 @@
+actor: Tester
+
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 512M
+    strict_xml: true
+    my_param:
+      user: 'mylogin'
+      password: 'mypassword'
+
+coverage:
+    enabled: true
+    whitelist:
+        include:
+            - src/*
+
+extensions:
+    enabled:
+        - Codeception\Extension\GherkinParam
