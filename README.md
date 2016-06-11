@@ -51,7 +51,7 @@ If the key does not exist, then an exception `RuntimeException` is thrown.
 From version 0.3, you can refer to a test suite configuration parameter using the syntax `{{config:param}}`.  
 Note that the keyword **config:** is mandatory. If the config parameter does not exists, then `null` is returned.
 
-### Example
+## Example
 ```gherkin
 Feature: Parametrize Gherkin Feature
   In order to create dynamic Gherkin scenario
