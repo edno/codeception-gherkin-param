@@ -41,7 +41,7 @@ class GherkinParam extends \Codeception\Platform\Extension
         return $this->getValueFromConfig($arg);
       } elseif (preg_match(static::$regEx['array'], $arg)) {
         return $this->getValueFromArray($arg);
-      }else {
+      } else {
         return Fixtures::get($arg);
       }
     } else {
