@@ -9,6 +9,7 @@
  */
 namespace Codeception\Extension;
 
+use RuntimeException;
 use Codeception\Util\Fixtures;
 use Behat\Gherkin\Node\TableNode;
 use ReflectionProperty;
@@ -28,7 +29,8 @@ class GherkinParam extends \Codeception\Platform\Extension
   private static $regEx = Array(
                           'match'  => '/^{{[A-z0-9_:-]+}}$/',
                           'filter' => '/[{}]/',
-                          'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/'
+                          'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
+                          'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
                         );
 
   // parse param and replace {{.*}} by its Fixtures::get() value if exists
@@ -38,7 +40,9 @@ class GherkinParam extends \Codeception\Platform\Extension
       $arg = preg_filter(static::$regEx['filter'], '', $param);
       if (preg_match(static::$regEx['config'], $arg)) {
         return $this->getValueFromConfig($arg);
-      } else {
+      } elseif (preg_match(static::$regEx['array'], $arg)) {
+        return $this->getValueFromArray($arg);
+      }else {
         return Fixtures::get($arg);
       }
     } else {
@@ -53,7 +57,7 @@ class GherkinParam extends \Codeception\Platform\Extension
 
     preg_match_all(static::$regEx['config'], $param, $args, PREG_PATTERN_ORDER);
     foreach ($args[1] as $arg) {
-      while (array_key_exists($arg, $config)) {
+      if (array_key_exists($arg, $config)) {
         $value = $config[$arg];
         if (is_array($value)) {
           $config = $value;
@@ -63,6 +67,32 @@ class GherkinParam extends \Codeception\Platform\Extension
       }
     }
     return $value;
+  }
+
+  protected function getValueFromArray($param)
+  {
+    $value = null;
+
+    preg_match_all(static::$regEx['array'], $param, $args);
+    $array = Fixtures::get($args['var'][0]);
+    foreach ($args['key'] as $arg) {
+      do {
+        $exist = array_key_exists($arg, $array);
+          if ($exist) {
+          $value = $array[$arg];
+          if (is_array($value)) {
+            $array = $value;
+          } else {
+            break;
+          }
+        }
+      } while($exist);
+    }
+    if ($exist) {
+      return $value;
+    } else {
+      throw new RuntimeException("{$array}[{$arg}] does not exist");
+    }
   }
 
   public function beforeSuite(\Codeception\Event\SuiteEvent $e)

@@ -16,4 +16,13 @@ class Acceptance extends \Codeception\Module
            Fixtures::add($row[0], $row[1]);
          }
      }
+
+     /**
+      * @When /^I have an array "(\w+)" with values \[(.+)]$/i
+      */
+      public function iHaveArray($var, $values)
+      {
+          $array = preg_split('/,\s?/', $values);
+          Fixtures::add($var, $array);
+      }
 }

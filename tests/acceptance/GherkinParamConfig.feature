@@ -1,4 +1,4 @@
-Feature: Parametrize Gherkin Feature
+Feature: Parametrize Gherkin Feature (Config)
   In order to create dynamic Gherkin scenario
   As a tester
   I need to be able to retrieve config parameter

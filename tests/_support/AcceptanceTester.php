@@ -31,7 +31,7 @@ class AcceptanceTester extends \Codeception\Actor
     }
 
     /**
-     * @Then I should see :arg1 equals :arg2
+     * @Then /^I should see "({{[A-z0-9\[\]_:-]+}})" equals (?:to )?(?:")?([^"]+)(?:")?$/
      */
      public function iSeeEqual($arg1, $arg2)
      {
