@@ -9,9 +9,9 @@
  */
 namespace Codeception\Extension;
 
-use PHPUnit_Framework_ExpectationFailedException;
 use Codeception\Util\Fixtures;
 use Behat\Gherkin\Node\TableNode;
+use ReflectionProperty;
 
 class GherkinParam extends \Codeception\Platform\Extension
 {
