@@ -45,7 +45,7 @@ While executing your features the variables will be automatically replaced by th
 
 ### Array parameters
 From version 0.3, you can refer to an element in an array using the syntax `{{param[key]}}`.  
-If the key does not exist, then an exception `RuntimeException` is thrown.
+If the key does not exist, then `null` is returned.
 
 ### Test Suite Config parameters
 From version 0.3, you can refer to a test suite configuration parameter using the syntax `{{config:param}}`.  

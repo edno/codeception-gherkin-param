@@ -10,6 +10,7 @@
 namespace Codeception\Extension;
 
 use RuntimeException;
+use PHPUnit_Framework_ExpectationFailedException;
 use Codeception\Util\Fixtures;
 use Behat\Gherkin\Node\TableNode;
 use ReflectionProperty;
@@ -75,26 +76,17 @@ class GherkinParam extends \Codeception\Platform\Extension
 
     preg_match_all(static::$regEx['array'], $param, $args);
     $array = Fixtures::get($args['var'][0]);
-    foreach ($args['key'] as $arg) {
-      do {
-        $exist = array_key_exists($arg, $array);
-          if ($exist) {
-          $value = $array[$arg];
-          if (is_array($value)) {
-            $array = $value;
-          } else {
-            break;
-          }
-        }
-      } while($exist);
-    }
-    if ($exist) {
-      return $value;
+    if (array_key_exists($args['key'][0], $array)) {
+        $value = $array[$args['key'][0]];
     } else {
-      throw new RuntimeException("{$array}[{$arg}] does not exist");
+      return null;
     }
+    return $value;
   }
 
+  /**
+   * @codeCoverageIgnore
+   */
   public function beforeSuite(\Codeception\Event\SuiteEvent $e)
   {
     static::$suite_config = $e->getSettings();
