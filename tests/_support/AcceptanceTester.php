@@ -31,7 +31,7 @@ class AcceptanceTester extends \Codeception\Actor
     }
 
     /**
-     * @Then I should see :arg1 equals :arg2
+     * @Then /^I should see "({{[A-z0-9\[\]_:-]+}})" equals (?:to )?(?:")?([^"]+)(?:")?$/i
      */
      public function iSeeEqual($arg1, $arg2)
      {
@@ -48,4 +48,12 @@ class AcceptanceTester extends \Codeception\Actor
           $this->assertEquals($row[0], $row[1]);
         }
       }
+
+      /**
+       * @Then /^I should see "(.+)" is null$/i
+       */
+       public function iSeeNull($arg1)
+       {
+         $this->assertNull($arg1);
+       }
 }

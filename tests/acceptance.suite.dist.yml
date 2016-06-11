@@ -10,3 +10,6 @@ modules:
   enabled:
     - Asserts
     - Helper\Acceptance
+    - Helper\ExtHelper
+
+some_param: 42

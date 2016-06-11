@@ -38,10 +38,20 @@ extensions:
 ## Usage
 Once installed you will be able to access variables stored using
 [Fixtures](http://codeception.com/docs/reference/Fixtures).  
+
+### Simple parameters
 In scenario steps, the variables can be accessed using the syntax `{{param}}`.  
 While executing your features the variables will be automatically replaced by their value.
 
-### Example
+### Array parameters
+From version 0.3, you can refer to an element in an array using the syntax `{{param[key]}}`.  
+If the key does not exist, then `null` is returned.
+
+### Test Suite Config parameters
+From version 0.3, you can refer to a test suite configuration parameter using the syntax `{{config:param}}`.  
+Note that the keyword **config:** is mandatory. If the config parameter does not exists, then `null` is returned.
+
+## Example
 ```gherkin
 Feature: Parametrize Gherkin Feature
   In order to create dynamic Gherkin scenario
@@ -51,7 +61,20 @@ Feature: Parametrize Gherkin Feature
   Scenario: Scenario using simple parameter
     Given I have a parameter "test" with value "42"
     Then I should see "{{test}}" equals "42"
+
+  Scenario: Scenario using array parameter
+    Given I have an array "test" with values [1, two, 3.14, IV, 101]
+    Then I should see "{{test[1]}}" equals "two"
+
+  Scenario: Scenario using config parameter
+    Given I have a configuration file "acceptance.suite.yml" containing
+      """
+      theResponse: 42
+      """
+    When I execute a scenario calling the parameter 'theResponse'
+    Then I should see "{{config:theResponse}}" equals "42"
 ```
+
 The steps definition in `AcceptanceTester.php` do not require any change
 ```php
 /**

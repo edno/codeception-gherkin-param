@@ -9,6 +9,8 @@
  */
 namespace Codeception\Extension;
 
+use RuntimeException;
+use PHPUnit_Framework_ExpectationFailedException;
 use Codeception\Util\Fixtures;
 use Behat\Gherkin\Node\TableNode;
 use ReflectionProperty;
@@ -17,21 +19,77 @@ class GherkinParam extends \Codeception\Platform\Extension
 {
   // list events to listen to
   public static $events = array(
-		//run before any steps
-		'step.before' => 'beforeStep'
+    //run before any suite
+    'suite.before' => 'beforeSuite',
+    //run before any steps
+    'step.before' => 'beforeStep'
   );
-  
+
+  private static $suite_config;
+
+  private static $regEx = Array(
+                          'match'  => '/^{{[A-z0-9_:-]+}}$/',
+                          'filter' => '/[{}]/',
+                          'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
+                          'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
+                        );
+
   // parse param and replace {{.*}} by its Fixtures::get() value if exists
   protected function getValueFromParam($param)
   {
-    // set regexp
-    $arRegEx = Array('match' => '/^{{\w+}}$/', 'filter' => '/[{}]/');
-    if (preg_match($arRegEx['match'], $param)) {
-      $arg = preg_filter($arRegEx['filter'], '', $param);
-      return Fixtures::get($arg);
+    if (preg_match(static::$regEx['match'], $param)) {
+      $arg = preg_filter(static::$regEx['filter'], '', $param);
+      if (preg_match(static::$regEx['config'], $arg)) {
+        return $this->getValueFromConfig($arg);
+      } elseif (preg_match(static::$regEx['array'], $arg)) {
+        return $this->getValueFromArray($arg);
+      }else {
+        return Fixtures::get($arg);
+      }
     } else {
       return $param;
     }
+  }
+
+  protected function getValueFromConfig($param)
+  {
+    $value = null;
+    $config = static::$suite_config;
+
+    preg_match_all(static::$regEx['config'], $param, $args, PREG_PATTERN_ORDER);
+    foreach ($args[1] as $arg) {
+      if (array_key_exists($arg, $config)) {
+        $value = $config[$arg];
+        if (is_array($value)) {
+          $config = $value;
+        } else {
+          break;
+        }
+      }
+    }
+    return $value;
+  }
+
+  protected function getValueFromArray($param)
+  {
+    $value = null;
+
+    preg_match_all(static::$regEx['array'], $param, $args);
+    $array = Fixtures::get($args['var'][0]);
+    if (array_key_exists($args['key'][0], $array)) {
+        $value = $array[$args['key'][0]];
+    } else {
+      return null;
+    }
+    return $value;
+  }
+
+  /**
+   * @codeCoverageIgnore
+   */
+  public function beforeSuite(\Codeception\Event\SuiteEvent $e)
+  {
+    static::$suite_config = $e->getSettings();
   }
 
   public function beforeStep(\Codeception\Event\StepEvent $e)
