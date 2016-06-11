@@ -15,6 +15,11 @@ settings:
     my_param:
       user: 'mylogin'
       password: 'mypassword'
+    my_array:
+      - user: 'user_in_array'
+    my_edgecase:
+      0:
+        user: 'edgecase'
 
 coverage:
     enabled: true

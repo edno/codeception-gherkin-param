@@ -20,8 +20,8 @@ Feature: Parametrize Gherkin Feature
         colors: true
         memory_limit: 512M
         my_param:
-          - user: 'mylogin'
-          - password: 'mypassword'
+          user: 'mylogin'
+          password: 'mypassword'
 
       extensions:
           enabled:
@@ -44,3 +44,56 @@ Feature: Parametrize Gherkin Feature
       """
     When I execute a scenario calling the parameter 'some_param'
     Then I should see "{{config:some_param}}" equals "42"
+
+    Scenario: Parameters array format
+      Given I have a configuration file "codeception.yml"
+        """
+        actor: Tester
+
+        paths:
+          tests: tests
+          log: tests/_output
+          data: tests/_data
+          support: tests/_support
+          envs: tests/_envs
+
+        settings:
+          bootstrap: _bootstrap.php
+          colors: true
+          memory_limit: 512M
+          my_array:
+            - user: 'user_in_array'
+
+        extensions:
+            enabled:
+                - Codeception\Extension\GherkinParam
+        """
+      When I execute a scenario calling the parameter 'my_array:0:user'
+      Then I should see "{{config:my_array:0:user}}" equals "user_in_array"
+
+    Scenario: Parameters edge case
+      Given I have a configuration file "codeception.yml"
+        """
+        actor: Tester
+
+        paths:
+          tests: tests
+          log: tests/_output
+          data: tests/_data
+          support: tests/_support
+          envs: tests/_envs
+
+        settings:
+          bootstrap: _bootstrap.php
+          colors: true
+          memory_limit: 512M
+          my_edgecase:
+            0:
+              user: 'edgecase'
+
+        extensions:
+            enabled:
+                - Codeception\Extension\GherkinParam
+        """
+      When I execute a scenario calling the parameter 'my_edgecase:0:user'
+      Then I should see "{{config:my_edgecase:0:user}}" equals "edgecase"
