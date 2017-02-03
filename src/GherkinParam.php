@@ -15,24 +15,38 @@ use ReflectionProperty;
 
 class GherkinParam extends \Codeception\Platform\Extension
 {
-  // list events to listen to
-  public static $events = array(
+  /**
+   * @var array List events to listen to
+   */
+  public static $events = [
     //run before any suite
     'suite.before' => 'beforeSuite',
     //run before any steps
     'step.before' => 'beforeStep'
-  );
+  ];
 
-  private static $suite_config;
+  /**
+   * @var array Current test suite config
+   */
+  private static $suiteConfig;
 
-  private static $regEx = Array(
-                          'match'  => '/^{{[A-z0-9_:-]+}}$/',
-                          'filter' => '/[{}]/',
-                          'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
-                          'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
-                        );
+  /**
+   * @var array RegExp for parsing steps
+   */
+  private static $regEx = [
+    'match'  => '/^{{[A-z0-9_:-]+}}$/',
+    'filter' => '/[{}]/',
+    'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
+    'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
+   ];
 
-  // parse param and replace {{.*}} by its Fixtures::get() value if exists
+  /**
+   * Parse param and replace {{.*}} by its Fixtures::get() value if exists
+   *
+   * @param string $param
+   *
+   * @return mixed|string Returns parameter's value if exists, else parameter's name
+   */
   protected function getValueFromParam($param)
   {
     if (preg_match(static::$regEx['match'], $param)) {
@@ -49,10 +63,17 @@ class GherkinParam extends \Codeception\Platform\Extension
     }
   }
 
+  /**
+   * Retrieve param value from current suite config
+   *
+   * @param string $param
+   *
+   * @return mixed|null Returns parameter's value if exists, else null
+   */
   protected function getValueFromConfig($param)
   {
     $value = null;
-    $config = static::$suite_config;
+    $config = static::$suiteConfig;
 
     preg_match_all(static::$regEx['config'], $param, $args, PREG_PATTERN_ORDER);
     foreach ($args[1] as $arg) {
@@ -68,6 +89,13 @@ class GherkinParam extends \Codeception\Platform\Extension
     return $value;
   }
 
+  /**
+   * Retrieve param value from array in Fixtures
+   *
+   * @param string $param
+   *
+   * @return mixed|null Returns parameter's value if exists, else null
+   */
   protected function getValueFromArray($param)
   {
     $value = null;
@@ -81,13 +109,23 @@ class GherkinParam extends \Codeception\Platform\Extension
   }
 
   /**
+   * Capture suite's config before any execution
+   *
+   * @param \Codeception\Event\SuiteEvent $e
+   *
    * @codeCoverageIgnore
+   * @ignore Codeception specific
    */
   public function beforeSuite(\Codeception\Event\SuiteEvent $e)
   {
-    static::$suite_config = $e->getSettings();
+    static::$suiteConfig = $e->getSettings();
   }
 
+  /**
+   * Parse scenario's step before execution
+   *
+   * @param \Codeception\Event\StepEvent $e
+   */
   public function beforeStep(\Codeception\Event\StepEvent $e)
   {
     $step = $e->getStep();
@@ -107,7 +145,7 @@ class GherkinParam extends \Codeception\Platform\Extension
       // e.g. I see :
       //  | paramater |
       //  | {{param}} |
-        $table = Array();
+        $table = [];
         foreach ($arg->getRows() as $i => $row) {
           foreach ($row as $j => $cell) {
               $table[$i][$j] = $this->getValueFromParam($cell);
