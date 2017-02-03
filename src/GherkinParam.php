@@ -49,11 +49,11 @@ class GherkinParam extends \Codeception\Platform\Extension
    */
   protected function getValueFromParam($param)
   {
-    if (preg_match(static::$regEx['match'], $param)) {
-      $arg = preg_filter(static::$regEx['filter'], '', $param);
-      if (preg_match(static::$regEx['config'], $arg)) {
+    if (preg_match(self::$regEx['match'], $param)) {
+      $arg = preg_filter(self::$regEx['filter'], '', $param);
+      if (preg_match(self::$regEx['config'], $arg)) {
         return $this->getValueFromConfig($arg);
-      } elseif (preg_match(static::$regEx['array'], $arg)) {
+      } elseif (preg_match(self::$regEx['array'], $arg)) {
         return $this->getValueFromArray($arg);
       } else {
         return Fixtures::get($arg);
@@ -75,7 +75,7 @@ class GherkinParam extends \Codeception\Platform\Extension
     $value = null;
     $config = self::$suiteConfig;
 
-    preg_match_all(static::$regEx['config'], $param, $args, PREG_PATTERN_ORDER);
+    preg_match_all(self::$regEx['config'], $param, $args, PREG_PATTERN_ORDER);
     foreach ($args[1] as $arg) {
       if (array_key_exists($arg, $config)) {
         $value = $config[$arg];
@@ -100,7 +100,7 @@ class GherkinParam extends \Codeception\Platform\Extension
   {
     $value = null;
 
-    preg_match_all(static::$regEx['array'], $param, $args);
+    preg_match_all(self::$regEx['array'], $param, $args);
     $array = Fixtures::get($args['var'][0]);
     if (array_key_exists($args['key'][0], $array)) {
         $value = $array[$args['key'][0]];
