@@ -38,7 +38,7 @@ class GherkinParam extends \Codeception\Platform\Extension
     'filter' => '/[{}]/',
     'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
     'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
-   ];
+  ];
 
   /**
    * Parse param and replace {{.*}} by its Fixtures::get() value if exists
@@ -73,7 +73,7 @@ class GherkinParam extends \Codeception\Platform\Extension
   protected function getValueFromConfig($param)
   {
     $value = null;
-    $config = static::$suiteConfig;
+    $config = self::$suiteConfig;
 
     preg_match_all(static::$regEx['config'], $param, $args, PREG_PATTERN_ORDER);
     foreach ($args[1] as $arg) {
@@ -118,7 +118,7 @@ class GherkinParam extends \Codeception\Platform\Extension
    */
   public function beforeSuite(\Codeception\Event\SuiteEvent $e)
   {
-    static::$suiteConfig = $e->getSettings();
+    self::$suiteConfig = $e->getSettings();
   }
 
   /**
