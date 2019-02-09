@@ -13,7 +13,7 @@ use Codeception\Util\Fixtures;
 use Behat\Gherkin\Node\TableNode;
 use ReflectionProperty;
 
-class GherkinParam extends \Codeception\Platform\Extension
+class GherkinParam extends \Codeception\Extension
 {
   /**
    * @var array List events to listen to
