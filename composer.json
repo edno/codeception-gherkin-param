@@ -15,11 +15,11 @@
     "codeception/codeception": ">=2.2"
   },
   "require-dev": {
-    "satooshi/php-coveralls": "^2.0"
+    "php-coveralls/php-coveralls": "^2.0"
   },
   "autoload": {
     "psr-4": {
-	"Codeception\\Extension\\": "src/"
+	     "Codeception\\Extension\\": "src/"
     }
   },
   "config": {
