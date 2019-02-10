@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Before step hook that provide parameter syntax notation
  * for accessing fixture data between Gherkin steps/tests
@@ -47,7 +50,7 @@ class GherkinParam extends \Codeception\Extension
    *
    * @return mixed|string Returns parameter's value if exists, else parameter's name
    */
-  protected function getValueFromParam($param)
+  protected function getValueFromParam(string $param)
   {
     if (preg_match(self::$regEx['match'], $param)) {
       $arg = preg_filter(self::$regEx['filter'], '', $param);
@@ -70,7 +73,7 @@ class GherkinParam extends \Codeception\Extension
    *
    * @return mixed|null Returns parameter's value if exists, else null
    */
-  protected function getValueFromConfig($param)
+  protected function getValueFromConfig(string $param)
   {
     $value = null;
     $config = self::$suiteConfig;
@@ -96,7 +99,7 @@ class GherkinParam extends \Codeception\Extension
    *
    * @return mixed|null Returns parameter's value if exists, else null
    */
-  protected function getValueFromArray($param)
+  protected function getValueFromArray(string $param)
   {
     $value = null;
 

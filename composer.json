@@ -11,7 +11,7 @@
       }
   ],
   "require": {
-    "php": ">=5.4",
+    "php": ">=7.0",
     "codeception/codeception": ">=2.2"
   },
   "require-dev": {
@@ -21,9 +21,6 @@
     "psr-4": {
 	     "Codeception\\Extension\\": "src/"
     }
-  },
-  "config": {
-      "preferred-install": "dev"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
