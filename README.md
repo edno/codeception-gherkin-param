@@ -6,6 +6,7 @@
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/edno/codeception-gherkin-param.svg?style=flat-square)](https://scrutinizer-ci.com/g/edno/codeception-gherkin-param/?branch=master)
 [![Coverage Status](https://img.shields.io/coveralls/edno/codeception-gherkin-param.svg?style=flat-square)](https://coveralls.io/github/edno/codeception-gherkin-param?branch=master)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/master/LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param?ref=badge_shield)
 
 The [Codeception](http://codeception.com/) extension for supporting parameter notation
 in [Gherkin](https://github.com/Codeception/Codeception/blob/master/docs/07-BDD.md)
@@ -93,3 +94,7 @@ The steps definition in `AcceptanceTester.php` do not require any change
  }
 ```
  You can find more examples in the [test folder](https://github.com/edno/codeception-gherkin-param/tree/master/tests/acceptance).
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param?ref=badge_large)
