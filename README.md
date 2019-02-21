@@ -2,7 +2,7 @@
 
 [![Packagist](https://img.shields.io/packagist/dt/edno/codeception-gherkin-param.svg?style=flat-square)](https://packagist.org/packages/edno/codeception-gherkin-param)
 [![Latest Version](https://img.shields.io/packagist/v/edno/codeception-gherkin-param.svg?style=flat-square)](https://packagist.org/packages/edno/codeception-gherkin-param)
-[![Build Status](https://img.shields.io/travis/edno/codeception-gherkin-param.svg?style=flat-square)](https://travis-ci.org/edno/codeception-gherkin-param)
+[![Build Status](https://img.shields.io/travis/com/edno/codeception-gherkin-param.svg?style=flat-square)](https://travis-ci.com/edno/codeception-gherkin-param)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/edno/codeception-gherkin-param.svg?style=flat-square)](https://scrutinizer-ci.com/g/edno/codeception-gherkin-param/?branch=master)
 [![Coverage Status](https://img.shields.io/coveralls/edno/codeception-gherkin-param.svg?style=flat-square)](https://coveralls.io/github/edno/codeception-gherkin-param?branch=master)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/master/LICENSE)
