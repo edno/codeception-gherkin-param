@@ -48,9 +48,9 @@ class GherkinParam extends \Codeception\Extension
    *
    * @param string $param
    *
-   * @return mixed|string Returns parameter's value if exists, else parameter's name
+   * @return \mixed|null Returns parameter's value if exists, else parameter's name
    */
-  protected function getValueFromParam(string $param)
+  final protected function getValueFromParam(string $param)
   {
     if (preg_match(self::$regEx['match'], $param)) {
       $arg = preg_filter(self::$regEx['filter'], '', $param);
@@ -71,9 +71,9 @@ class GherkinParam extends \Codeception\Extension
    *
    * @param string $param
    *
-   * @return mixed|null Returns parameter's value if exists, else null
+   * @return \mixed|null Returns parameter's value if exists, else null
    */
-  protected function getValueFromConfig(string $param)
+  final protected function getValueFromConfig(string $param)
   {
     $value = null;
     $config = self::$suiteConfig;
@@ -97,9 +97,9 @@ class GherkinParam extends \Codeception\Extension
    *
    * @param string $param
    *
-   * @return mixed|null Returns parameter's value if exists, else null
+   * @return \mixed|null Returns parameter's value if exists, else null
    */
-  protected function getValueFromArray(string $param)
+  final protected function getValueFromArray(string $param)
   {
     $value = null;
 
@@ -119,7 +119,7 @@ class GherkinParam extends \Codeception\Extension
    * @codeCoverageIgnore
    * @ignore Codeception specific
    */
-  public function beforeSuite(\Codeception\Event\SuiteEvent $e)
+  final public function beforeSuite(\Codeception\Event\SuiteEvent $e): void
   {
     self::$suiteConfig = $e->getSettings();
   }
@@ -129,7 +129,7 @@ class GherkinParam extends \Codeception\Extension
    *
    * @param \Codeception\Event\StepEvent $e
    */
-  public function beforeStep(\Codeception\Event\StepEvent $e)
+  final public function beforeStep(\Codeception\Event\StepEvent $e): void
   {
     $step = $e->getStep();
     // access to the protected property using reflection
