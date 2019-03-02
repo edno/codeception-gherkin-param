@@ -115,11 +115,12 @@ class GherkinParam extends \Codeception\Extension
    * Capture suite's config before any execution
    *
    * @param \Codeception\Event\SuiteEvent $e
+   * @return void
    *
    * @codeCoverageIgnore
    * @ignore Codeception specific
    */
-  final public function beforeSuite(\Codeception\Event\SuiteEvent $e): void
+  final public function beforeSuite(\Codeception\Event\SuiteEvent $e)
   {
     self::$suiteConfig = $e->getSettings();
   }
@@ -128,8 +129,9 @@ class GherkinParam extends \Codeception\Extension
    * Parse scenario's step before execution
    *
    * @param \Codeception\Event\StepEvent $e
+   * @return void
    */
-  final public function beforeStep(\Codeception\Event\StepEvent $e): void
+  final public function beforeStep(\Codeception\Event\StepEvent $e)
   {
     $step = $e->getStep();
     // access to the protected property using reflection
