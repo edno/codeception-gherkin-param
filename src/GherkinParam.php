@@ -157,6 +157,12 @@ class GherkinParam extends \Codeception\Extension
           }
         }
         $args[$index] = new TableNode($table);
+      } elseif (is_array($arg)) {
+        foreach ($arg as $k => $v) {
+          if (is_string($v)) {
+             $args[$index][$k] = $this->getValueFromParam($v);
+          }
+        }
       }
     }
     // set new arguments value

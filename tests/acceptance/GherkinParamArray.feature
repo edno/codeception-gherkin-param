@@ -14,3 +14,16 @@ Feature: Parametrize Gherkin Feature (Array)
   Scenario: Key not exist (exception)
     Given I have an array "test" with values [1, two, 3.14, IV, 101]
     Then I should see "{{test[9999]}}" is null
+
+  Scenario: Using array parameters as values of associative array
+    Given I have an array "shape" with values [triangle, blue]
+    And I have a parameter "shapes" with values
+      | shape        | color        |
+      | circle       | green        |
+      | square       | yellow       |
+      | {{shape[0]}} | {{shape[1]}} |
+    Then I should see "shapes" with values
+      | shape    | color  |
+      | circle   | green  |
+      | square   | yellow |
+      | triangle | blue   |

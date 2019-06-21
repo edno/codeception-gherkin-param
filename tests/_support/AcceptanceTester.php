@@ -56,4 +56,27 @@ class AcceptanceTester extends \Codeception\Actor
        {
          $this->assertNull($arg1);
        }
+
+    /**
+     * @Given I have a parameter :param with values
+     * @param string $param
+     * @param TableNode $values
+     */
+    public function iHaveParameterWithValues(string $param, TableNode $values)
+    {
+        Fixtures::add($param, $values->getHash());
+    }
+
+    /**
+     * @Then I should see :param with values
+     * @param string $param
+     * @param TableNode $table
+     */
+    public function iSeeParamEquals(string $param, TableNode $table)
+    {
+        $hash = $table->getHash();
+        foreach (Fixtures::get($param) as $key => $values) {
+            $this->assertEquals($hash[$key], $values);
+        }
+    }
 }
