@@ -35,3 +35,17 @@ Feature: Parametrize Gherkin Feature
   Scenario: Scenario using JSON string
     Given I have a parameter "test" with value "{'value': 42}"
     Then I should see "{{test}}" equals "{'value': 42}"
+
+  Scenario: Using parameter as value of associative array
+    Given I have a parameter "shape" with value "triangle"
+    And I have a parameter "color" with value "blue"
+    And I have a parameter "shapes" with values
+      | shape     | color     |
+      | circle    | green     |
+      | square    | yellow    |
+      | {{shape}} | {{color}} |
+    Then I should see "shapes" with values
+      | shape    | color  |
+      | circle   | green  |
+      | square   | yellow |
+      | triangle | blue   |
