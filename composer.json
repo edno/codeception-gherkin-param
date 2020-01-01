@@ -15,11 +15,12 @@
     "codeception/codeception": ">=2.2"
   },
   "require-dev": {
-    "php-coveralls/php-coveralls": "^2.1"
+    "php-coveralls/php-coveralls": "^2",
+    "codeception/module-asserts": "^1"
   },
   "autoload": {
     "psr-4": {
-	     "Codeception\\Extension\\": "src/"
+	"Codeception\\Extension\\": "src/"
     }
   },
   "minimum-stability": "dev",
