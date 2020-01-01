@@ -21,7 +21,7 @@ scenario.
 The extension can be installed using [Composer](https://getcomposer.org)
 
 ```bash
-$ composer require edno/codeception-gherkin-param
+$ composer require edno/codeception-gherkin-param --dev
 ```
 
 Be sure to enable the extension in `codeception.yml` as shown in
