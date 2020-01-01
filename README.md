@@ -14,8 +14,8 @@ scenario.
 
 ## Minimum Requirements
 
-- Codeception ≥ 2.2
-- PHP ≥ 7.0
+- Codeception 3.x, 4.x
+- PHP 7.x
 
 ## Installation
 The extension can be installed using [Composer](https://getcomposer.org)
