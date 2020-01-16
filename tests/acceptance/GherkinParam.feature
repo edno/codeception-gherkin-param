@@ -6,6 +6,7 @@ Feature: Parametrize Gherkin Feature
   Scenario: Scenario using simple parameter
     Given I have a parameter "test" with value "42"
     Then I should see "{{test}}" equals "42"
+    Then I should see "{{ test }}" equals "42"
 
   Scenario: Scenario using table parameter
     Given I have a parameter "my_param" with value "This is a test"
@@ -13,7 +14,7 @@ Feature: Parametrize Gherkin Feature
     Then I should see following:
       | parameter         | equals to      |
       | {{my_param}}      | This is a test |
-      | {{another_param}} | 3.14           |
+      | {{ another_param }} | 3.14           |
 
   Scenario Outline: Scenario using example
     Given I have a parameter "test" with value "param"
@@ -26,11 +27,14 @@ Feature: Parametrize Gherkin Feature
 
   Scenario: Scenario using table in helper
     Given I have a parameter "test" with value "Table Node"
+    And I have a parameter "another_param" with value "3.14"
     When I have parameters
         | parameter | value      |
         | param1    | Fix Helper |
         | param2    | {{test}}   |
+        | param3    | {{ another_param }}   |
     Then I should see "{{param2}}" equals "{{test}}"
+    Then I should see "{{param3}}" equals "{{another_param}}"
 
   Scenario: Scenario using JSON string
     Given I have a parameter "test" with value "{'value': 42}"
