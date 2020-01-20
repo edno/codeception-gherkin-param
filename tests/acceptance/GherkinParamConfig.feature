@@ -29,6 +29,7 @@ Feature: Parametrize Gherkin Feature (Config)
       """
     When I execute a scenario calling the parameter 'my_param:user'
     Then I should see "{{config:my_param:user}}" equals "mylogin"
+    Then I should see "{{config:my_param:user}}:{{config:my_param:password}}" equals "mylogin:mypassword"
 
   Scenario: Suite parameters from acceptance.suite.yml
     Given I have a configuration file "acceptance.suite.yml"

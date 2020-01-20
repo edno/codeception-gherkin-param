@@ -8,6 +8,11 @@ Feature: Parametrize Gherkin Feature
     Then I should see "{{test}}" equals "42"
     Then I should see "{{ test }}" equals "42"
 
+  Scenario: Scenario with multiple values
+    Given I have a parameter "first_param" with value "first"
+    Given I have a parameter "second_param" with value "second"
+    Then I should see "{{first_param}} and {{second_param}}" equals "first and second"
+
   Scenario: Scenario using table parameter
     Given I have a parameter "my_param" with value "This is a test"
     And I have a parameter "another_param" with value "3.14"

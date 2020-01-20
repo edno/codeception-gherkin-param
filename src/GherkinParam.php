@@ -37,7 +37,7 @@ class GherkinParam extends \Codeception\Extension
    * @var array RegExp for parsing steps
    */
   private static $regEx = [
-    'match'  => '/^{{\s?[A-z0-9_:-]+\s?}}$/',
+    'match'  => '/{{\s?[A-z0-9_:-]+\s?}}/',
     'filter' => '/[{}]/',
     'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
     'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
@@ -52,18 +52,23 @@ class GherkinParam extends \Codeception\Extension
    */
   final protected function getValueFromParam(string $param)
   {
-    if (preg_match(self::$regEx['match'], $param)) {
-      $arg = trim(preg_filter(self::$regEx['filter'], '', $param));
-      if (preg_match(self::$regEx['config'], $arg)) {
-        return $this->getValueFromConfig($arg);
-      } elseif (preg_match(self::$regEx['array'], $arg)) {
-        return $this->getValueFromArray($arg);
-      } else {
-        return Fixtures::get($arg);
+    if (preg_match_all(self::$regEx['match'], $param, $variables)){
+      $values = [];
+      foreach ($variables[0] as $variable)
+      {
+        $variableName = trim(preg_filter(self::$regEx['filter'], '', $variable));
+        if (preg_match(self::$regEx['config'], $variableName)) {
+          $values[] = $this->getValueFromConfig($variableName);
+        } elseif (preg_match(self::$regEx['array'], $variableName)) {
+          $values[] = $this->getValueFromArray($variableName);
+        } else {
+          $values[] = Fixtures::get($variableName);
+        }
       }
-    } else {
-      return $param;
+      $param = str_replace($variables[0], $values, $param);
     }
+
+    return $param;
   }
 
   /**
