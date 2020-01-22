@@ -35,7 +35,7 @@ class AcceptanceTester extends \Codeception\Actor
      */
      public function iSeeEqual($arg1, $arg2)
      {
-       $this->assertEquals($arg1, $arg2);
+       $this->assertEquals($arg2, $arg1);
      }
 
      /**
@@ -45,7 +45,7 @@ class AcceptanceTester extends \Codeception\Actor
       {
         foreach ($table->getRows() as $idx => $row) {
           if ($idx == 0) continue;
-          $this->assertEquals($row[0], $row[1]);
+          $this->assertEquals($row[1], $row[0]);
         }
       }
 
