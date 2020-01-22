@@ -43,7 +43,7 @@ Feature: Parametrize Gherkin Feature (Config)
       some_param: 42
       """
     When I execute a scenario calling the parameter 'some_param'
-    Then I should see "{{config:some_param}}" equals "42"
+    Then I should see "{{ config:some_param }}" equals "42"
 
     Scenario: Parameters array format
       Given I have a configuration file "codeception.yml"
