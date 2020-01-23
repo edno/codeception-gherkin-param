@@ -66,6 +66,10 @@ class GherkinParam extends \Codeception\Extension
         }
       }
       $param = str_replace($variables[0], $values, $param);
+
+      if (count($values) === 1 && $values[0] === null) {
+        return null;
+      }
     }
 
     return $param;
