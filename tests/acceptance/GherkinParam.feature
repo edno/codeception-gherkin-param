@@ -8,6 +8,10 @@ Feature: Parametrize Gherkin Feature
     Then I should see "{{test}}" equals "42"
     Then I should see "{{ test }}" equals "42"
 
+  Scenario: variable does not exist (exception)
+    Given I have a parameter "first" with value "42"
+    Then I should see "{{second}}" is null
+
   Scenario: Scenario using table parameter
     Given I have a parameter "my_param" with value "This is a test"
     And I have a parameter "another_param" with value "3.14"
