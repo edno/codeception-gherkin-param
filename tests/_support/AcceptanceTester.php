@@ -31,7 +31,7 @@ class AcceptanceTester extends \Codeception\Actor
     }
 
     /**
-     * @Then /^I should see "({{\s?[A-z0-9\[\]_:-]+\s?}})" equals (?:to )?(?:")?([^"]+)(?:")?$/i
+     * @Then /^I should see "([^"]+)" equals (?:to )?(?:")?([^"]+)(?:")?$/i
      */
      public function iSeeEqual($arg1, $arg2)
      {
