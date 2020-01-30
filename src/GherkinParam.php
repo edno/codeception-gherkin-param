@@ -12,12 +12,27 @@ declare(strict_types=1);
  */
 namespace Codeception\Extension;
 
-use Codeception\Util\Fixtures;
-use Behat\Gherkin\Node\TableNode;
-use ReflectionProperty;
+use \Codeception\Util\Fixtures;
+use \Behat\Gherkin\Node\TableNode;
+use \ReflectionProperty;
+use \RuntimeException;
+use \Codeception\Extension\GherkinParamException;
+use \Codeception\Configuration;
 
 class GherkinParam extends \Codeception\Extension
 {
+ 
+  /**
+   * @var boolean Flag to enable exception
+   * true: no exception thrown if parameter invalid, instead parameter is unchanged
+   * false: exception thrown if parameter invalid
+   */
+  private $throwException = false;
+
+  protected static $defaultSettings = [
+    'throwException' => false
+  ];
+
   /**
    * @var array List events to listen to
    */
@@ -37,11 +52,22 @@ class GherkinParam extends \Codeception\Extension
    * @var array RegExp for parsing steps
    */
   private static $regEx = [
-    'match'  => '/{{\s?[A-z0-9_:-]+\s?}}/',
+    'match'  => '/{{\s?[A-z0-9_:-<>]+\s?}}/',
     'filter' => '/[{}]/',
     'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
     'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
   ];
+
+  /**
+   * Constructor -- only used for reading module settings
+   *
+   * @param array $settings
+   */
+  public function __construct($settings = [])
+  {
+      $settings = Configuration::mergeConfigs(self::$defaultSettings, $settings);
+      $this->throwException = $settings['throwException'];
+  }
 
   /**
    * Parse param and replace {{.*}} by its Fixtures::get() value if exists
@@ -52,26 +78,78 @@ class GherkinParam extends \Codeception\Extension
    */
   final protected function getValueFromParam(string $param)
   {
-    if (preg_match_all(self::$regEx['match'], $param, $variables)){
-      $values = [];
-      foreach ($variables[0] as $variable)
-      {
-        $variableName = trim(preg_filter(self::$regEx['filter'], '', $variable));
-        if (preg_match(self::$regEx['config'], $variableName)) {
-          $values[] = $this->getValueFromConfig($variableName);
-        } elseif (preg_match(self::$regEx['array'], $variableName)) {
-          $values[] = $this->getValueFromArray($variableName);
-        } else {
-          $values[] = Fixtures::get($variableName);
+    if (preg_match_all(self::$regEx['match'], $param, $matches)) {
+      try {
+        $values = [];
+        $matches = $matches[0]; // override for readability
+        foreach ($matches as $variable)
+        {
+          $variable = trim(preg_filter(self::$regEx['filter'], '', $variable));
+          // config case
+          if (preg_match(self::$regEx['config'], $variable)) {
+            $values[] = $this->getValueFromConfig($variable);
+          } 
+          // array case
+          elseif (preg_match(self::$regEx['array'], $variable)) {
+            $values[] = $this->getValueFromArray($variable);
+          } 
+          // normal case
+          else {
+            try {
+              $values[] = Fixtures::get($variable);
+            } catch(GherkinParamException $e) {
+              if ($this->throwException) throw new GherkinParamException(null, null, $e);
+            }
+          }
+          // if machting value return is not found (null)
+          if (is_null(end($values))) {
+            if ($this->throwException) throw new GherkinParamException(null);
+          }
         }
-      }
-      $param = str_replace($variables[0], $values, $param);
 
-      if (count($values) === 1 && $values[0] === null) {
-        return null;
+        // array str_replace cannot be used 
+        // due to the default behavior when `search` and `replace` arrays size mismatch
+        $param = $this->mapParametersToValues($matches, $values, $param);
+
+      } catch(GherkinParamException $e) {
+        // only active if throwException setting is true
+        throw new GherkinParamException("Incorrect parameter name ${param}, or not initialized");
       }
+    
     }
 
+    return $param;
+  }
+
+  /**
+   * Replace parameters' matches by corresponding values
+   *
+   * @param array $matches
+   * @param array $values
+   * @param string $param
+   *
+   * @return \mixed|null Returns parameter's value if exists, else parameter {{name}}
+   */  
+  final private function mapParametersToValues(array $matches, array $values, string $param)
+  {
+    for ($i=0; $i<count($matches); $i++) {
+      $search = $matches[$i];
+      if (\is_string($search)) { // if null then skip
+        if (isset($values[$i])) {
+          $replacement = $values[$i];
+          if (\is_array($replacement)) { 
+            // case of replacement is an array (case of config param), ie param does not exists
+            if ($this->throwException) throw new GherkinParamException(null);
+            break;
+          }
+          $param = \str_replace($search, $replacement, $param);
+        } else {
+          if ($this->throwException) throw new GherkinParamException(null);
+        }
+      } else {
+        break;
+      }
+    }
     return $param;
   }
 
