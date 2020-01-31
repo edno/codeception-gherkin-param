@@ -30,7 +30,7 @@ class GherkinParam extends \Codeception\Extension
   private $throwException = false;
 
   protected static $defaultSettings = [
-    'throwException' => true
+    'throwException' => false
   ];
 
   /**
