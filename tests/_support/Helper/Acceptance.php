@@ -25,4 +25,12 @@ class Acceptance extends \Codeception\Module
           $array = preg_split('/,\s?/', $values);
           Fixtures::add($var, $array);
       }
+
+      /**
+      * @When /^I do not have an array "(\w+)"/i
+      */
+      public function iDoNotHaveArray($var)
+      {
+          // Do nothing with $var
+      }
 }

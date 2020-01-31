@@ -79,4 +79,13 @@ class AcceptanceTester extends \Codeception\Actor
             $this->assertEquals($hash[$key], $values);
         }
     }
+
+    /**
+    * @Given I do not have a parameter :param
+    */
+    public function iDoNotHaveAParameterWithValue($param)
+    {
+      // do nothing with $param
+    }
+
 }

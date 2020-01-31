@@ -12,10 +12,6 @@ Feature: Parametrize Gherkin Feature (Array)
     And I should see "{{test[4]}}" equals to "101"
     And I should see "{{test[4]}} and {{test[1]}}" equals "101 and two"
 
-  Scenario: Key not exist (exception)
-    Given I have an array "test" with values [1, two, 3.14, IV, 101]
-    Then I should see "{{test[9999]}}" is null
-
   Scenario: Using array parameters as values of associative array
     Given I have an array "shape" with values [triangle, blue]
     And I have a parameter "shapes" with values

@@ -98,28 +98,3 @@ Feature: Parametrize Gherkin Feature (Config)
       """
     When I execute a scenario calling the parameter 'my_edgecase:0:user'
     Then I should see "{{config:my_edgecase:0:user}}" equals "edgecase"
-
-  Scenario: Config key not exists (expect null)
-    Given I have a configuration file "codeception.yml"
-      """
-      actor: Tester
-
-      paths:
-        tests: tests
-        log: tests/_output
-        data: tests/_data
-        support: tests/_support
-        envs: tests/_envs
-
-      settings:
-        bootstrap: _bootstrap.php
-        colors: true
-        memory_limit: 512M
-        my_user: 'a value'
-
-      extensions:
-          enabled:
-              - Codeception\Extension\GherkinParam
-      """
-    When I execute a scenario calling the parameter 'config:not_a_param'
-    Then I should see "{{config:not_a_param}}" is null

@@ -91,13 +91,17 @@ class GherkinParam extends \Codeception\Extension
           } 
           // array case
           elseif (preg_match(self::$regEx['array'], $variable)) {
-            $values[] = $this->getValueFromArray($variable);
+            try {
+              $values[] = $this->getValueFromArray($variable);
+            } catch(RuntimeException $e) {
+              if ($this->throwException) throw new GherkinParamException(null, null, $e);
+            }
           } 
           // normal case
           else {
             try {
               $values[] = Fixtures::get($variable);
-            } catch(GherkinParamException $e) {
+            } catch(RuntimeException $e) {
               if ($this->throwException) throw new GherkinParamException(null, null, $e);
             }
           }
@@ -130,8 +134,10 @@ class GherkinParam extends \Codeception\Extension
    *
    * @return \mixed|null Returns parameter's value if exists, else parameter {{name}}
    */  
+  //TODO: pass param ref to function (&) [performance]
   final private function mapParametersToValues(array $matches, array $values, string $param)
   {
+    //TODO: move count() into separate variable [performance]
     for ($i=0; $i<count($matches); $i++) {
       $search = $matches[$i];
       if (\is_string($search)) { // if null then skip
@@ -142,6 +148,7 @@ class GherkinParam extends \Codeception\Extension
             if ($this->throwException) throw new GherkinParamException(null);
             break;
           }
+          //TODO: replace str_replace by strtr (performance)
           $param = \str_replace($search, $replacement, $param);
         } else {
           if ($this->throwException) throw new GherkinParamException(null);
@@ -160,6 +167,7 @@ class GherkinParam extends \Codeception\Extension
    *
    * @return \mixed|null Returns parameter's value if exists, else null
    */
+  //TODO: pass param ref to function (&) [performance]
   final protected function getValueFromConfig(string $param)
   {
     $value = null;
@@ -186,6 +194,7 @@ class GherkinParam extends \Codeception\Extension
    *
    * @return \mixed|null Returns parameter's value if exists, else null
    */
+  //TODO: pass param ref to function (&) [performance]
   final protected function getValueFromArray(string $param)
   {
     $value = null;
