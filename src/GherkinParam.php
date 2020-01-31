@@ -16,7 +16,7 @@ use \Codeception\Util\Fixtures;
 use \Behat\Gherkin\Node\TableNode;
 use \ReflectionProperty;
 use \RuntimeException;
-use \Codeception\Extension\GherkinParamException;
+use \Codeception\Exception\ExtensionException;
 use \Codeception\Configuration;
 
 class GherkinParam extends \Codeception\Extension
@@ -30,7 +30,7 @@ class GherkinParam extends \Codeception\Extension
   private $throwException = false;
 
   protected static $defaultSettings = [
-    'throwException' => false
+    'throwException' => true
   ];
 
   /**
@@ -94,7 +94,7 @@ class GherkinParam extends \Codeception\Extension
             try {
               $values[] = $this->getValueFromArray($variable);
             } catch(RuntimeException $e) {
-              if ($this->throwException) throw new GherkinParamException(null, null, $e);
+              if ($this->throwException) throw new GherkinParamException();
             }
           } 
           // normal case
@@ -102,12 +102,12 @@ class GherkinParam extends \Codeception\Extension
             try {
               $values[] = Fixtures::get($variable);
             } catch(RuntimeException $e) {
-              if ($this->throwException) throw new GherkinParamException(null, null, $e);
+              if ($this->throwException) throw new GherkinParamException();
             }
           }
           // if machting value return is not found (null)
           if (is_null(end($values))) {
-            if ($this->throwException) throw new GherkinParamException(null);
+            if ($this->throwException) throw new GherkinParamException();
           }
         }
 
@@ -117,7 +117,7 @@ class GherkinParam extends \Codeception\Extension
 
       } catch(GherkinParamException $e) {
         // only active if throwException setting is true
-        throw new GherkinParamException("Incorrect parameter name ${param}, or not initialized");
+        throw new ExtensionException($this, "Incorrect parameter name ${param}, or not initialized");
       }
     
     }
@@ -145,13 +145,13 @@ class GherkinParam extends \Codeception\Extension
           $replacement = $values[$i];
           if (\is_array($replacement)) { 
             // case of replacement is an array (case of config param), ie param does not exists
-            if ($this->throwException) throw new GherkinParamException(null);
+            if ($this->throwException) throw new GherkinParamException();
             break;
           }
           //TODO: replace str_replace by strtr (performance)
           $param = \str_replace($search, $replacement, $param);
         } else {
-          if ($this->throwException) throw new GherkinParamException(null);
+          if ($this->throwException) throw new GherkinParamException();
         }
       } else {
         break;
