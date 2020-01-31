@@ -34,9 +34,6 @@ Scenario: Array with invalid key
     Given I have an array "test" with values [1, two, 3.14, IV, 101]
     Then I should see "{{test[9999]}}" equals "{{test[9999]}}"
 
-@associative-array
-Scenario: 4
-
 @outline
 Scenario Outline: Outline example with parameter that does not exist
     Given I do not have a parameter "parameter"
