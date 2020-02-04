@@ -101,8 +101,7 @@ class GherkinParam extends \Codeception\Module
       try {
         $values = [];
         $matches = $matches[0]; // override for readability
-        foreach ($matches as $variable)
-        {
+        foreach ($matches as $variable) {
           $variable = trim(preg_filter(self::$regEx['filter'], '', $variable));
           // config case
           if (preg_match(self::$regEx['config'], $variable)) {
@@ -138,7 +137,10 @@ class GherkinParam extends \Codeception\Module
 
       } catch(GherkinParamException $e) {
         // only active if throwException setting is true
-        throw new ExtensionException($this, "Incorrect parameter name ${param}, or not initialized");
+        throw new ExtensionException(
+          $this, 
+          "Incorrect parameter name ${param}, or not initialized"
+        );
       }
     
     }
@@ -161,24 +163,19 @@ class GherkinParam extends \Codeception\Module
     //TODO: move count() into separate variable [performance]
     for ($i=0; $i<count($matches); $i++) {
       $search = $matches[$i];
-      if (\is_string($search)) { // if null then skip
-        if (isset($values[$i])) {
-          $replacement = $values[$i];
-          if (\is_array($replacement)) { 
-            // case of replacement is an array (case of config param), ie param does not exists
-            if ($this->throwException) throw new GherkinParamException();
-            if ($this->nullable) $param = null;
-            break;
-          }
-          //TODO: replace str_replace by strtr (performance)
-          $param = \str_replace($search, $replacement, $param);
-        } else {
+      if (isset($values[$i])) {
+        $replacement = $values[$i];
+        if (\is_array($replacement)) { 
+          // case of replacement is an array (case of config param), ie param does not exists
           if ($this->throwException) throw new GherkinParamException();
           if ($this->nullable) $param = null;
+          break;
         }
+        //TODO: replace str_replace by strtr (performance)
+        $param = \str_replace($search, $replacement, $param);
       } else {
+        if ($this->throwException) throw new GherkinParamException();
         if ($this->nullable) $param = null;
-        break;
       }
     }
     return $param;
@@ -226,7 +223,7 @@ class GherkinParam extends \Codeception\Module
     preg_match_all(self::$regEx['array'], $param, $args);
     $array = Fixtures::get($args['var'][0]);
     if (array_key_exists($args['key'][0], $array)) {
-        $value = $array[$args['key'][0]];
+      $value = $array[$args['key'][0]];
     }
     return $value;
   }
@@ -284,7 +281,7 @@ class GherkinParam extends \Codeception\Module
       } elseif (is_array($arg)) {
         foreach ($arg as $k => $v) {
           if (is_string($v)) {
-             $args[$index][$k] = $this->getValueFromParam($v);
+            $args[$index][$k] = $this->getValueFromParam($v);
           }
         }
       }
