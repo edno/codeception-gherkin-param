@@ -23,14 +23,23 @@ class GherkinParam extends \Codeception\Extension
 {
  
   /**
-   * @var boolean Flag to enable exception
-   * true: no exception thrown if parameter invalid, instead parameter is unchanged
-   * false: exception thrown if parameter invalid
+   * @var boolean Flag to enable exception (prioritised over $nullable=true)
+   * false: no exception thrown if parameter invalid, instead replacement value is parameter {{name}} 
+   * true: exception thrown if parameter invalid
    */
   private $throwException = false;
 
+  /**
+   * @var boolean Flag to null invalid parameter (incompatible with $throwException=true)
+   * true: if parameter invalid then replacement value will be null
+   * false: default behaviour, ie replacement value is parameter {{name}} 
+   */
+  //TODO: implement nullable behaviour
+  private $nullable = true;
+
   protected static $defaultSettings = [
-    'throwException' => false
+    'throwException' => false,
+    'nullable' => true
   ];
 
   /**
@@ -67,6 +76,7 @@ class GherkinParam extends \Codeception\Extension
   {
       $settings = Configuration::mergeConfigs(self::$defaultSettings, $settings);
       $this->throwException = $settings['throwException'];
+      $this->nullable = $settings['nullable'];
   }
 
   /**
@@ -95,6 +105,7 @@ class GherkinParam extends \Codeception\Extension
               $values[] = $this->getValueFromArray($variable);
             } catch(RuntimeException $e) {
               if ($this->throwException) throw new GherkinParamException();
+              if ($this->nullable) $values[] = null;
             }
           } 
           // normal case
@@ -103,6 +114,7 @@ class GherkinParam extends \Codeception\Extension
               $values[] = Fixtures::get($variable);
             } catch(RuntimeException $e) {
               if ($this->throwException) throw new GherkinParamException();
+              if ($this->nullable) $values[] = null;
             }
           }
           // if machting value return is not found (null)
@@ -146,14 +158,17 @@ class GherkinParam extends \Codeception\Extension
           if (\is_array($replacement)) { 
             // case of replacement is an array (case of config param), ie param does not exists
             if ($this->throwException) throw new GherkinParamException();
+            if ($this->nullable) $param = null;
             break;
           }
           //TODO: replace str_replace by strtr (performance)
           $param = \str_replace($search, $replacement, $param);
         } else {
           if ($this->throwException) throw new GherkinParamException();
+          if ($this->nullable) $param = null;
         }
       } else {
+        if ($this->nullable) $param = null;
         break;
       }
     }
@@ -246,13 +261,18 @@ class GherkinParam extends \Codeception\Extension
       // e.g. I see :
       //  | paramater |
       //  | {{param}} |
-        $table = [];
-        foreach ($arg->getRows() as $i => $row) {
+        $prop = new ReflectionProperty(get_class($arg), 'table');
+        $prop->setAccessible(true);
+        $table = $prop->getValue($arg);
+        foreach($table as $i => $row) {
           foreach ($row as $j => $cell) {
-              $table[$i][$j] = $this->getValueFromParam($cell);
+            $val = $this->getValueFromParam($cell);
+            $table[$i][$j] = $val ? $val : null; // issue TableNode does not support `null` values in table
           }
         }
-        $args[$index] = new TableNode($table);
+        $prop->setValue($arg, $table);
+        $prop->setAccessible(false);
+        $args[$index] = $arg;
       } elseif (is_array($arg)) {
         foreach ($arg as $k => $v) {
           if (is_string($v)) {

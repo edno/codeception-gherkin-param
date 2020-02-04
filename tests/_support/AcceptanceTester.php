@@ -88,4 +88,15 @@ class AcceptanceTester extends \Codeception\Actor
       // do nothing with $param
     }
 
+    /**
+    * @Then I should see null:
+    */
+    public function iSeeTableNull(TableNode $table)
+    {
+      foreach ($table->getRows() as $idx => $row) {
+        if ($idx == 0) continue;
+        $this->assertNull($row[0]);
+      }
+    }
+
 }
