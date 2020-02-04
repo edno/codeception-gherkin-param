@@ -18,8 +18,9 @@ use \ReflectionProperty;
 use \RuntimeException;
 use \Codeception\Exception\ExtensionException;
 use \Codeception\Configuration;
+use \Codeception\Step;
 
-class GherkinParam extends \Codeception\Extension
+class GherkinParam extends \Codeception\Module
 {
  
   /**
@@ -34,13 +35,11 @@ class GherkinParam extends \Codeception\Extension
    * true: if parameter invalid then replacement value will be null
    * false: default behaviour, ie replacement value is parameter {{name}} 
    */
-  //TODO: implement nullable behaviour
   private $nullable = false;
 
-  protected static $defaultSettings = [
-    'onErrorThrowException' => false,
-    'onErrorNull' => false
-  ];
+  protected $config = ['onErrorThrowException', 'onErrorNull'];
+
+  protected $requiredFields = [];
 
   /**
    * @var array List events to listen to
@@ -68,15 +67,25 @@ class GherkinParam extends \Codeception\Extension
   ];
 
   /**
-   * Constructor -- only used for reading module settings
-   *
-   * @param array $settings
+   * Initialize module configuration
    */
-  public function __construct($settings = [])
+  final public function _initialize() 
   {
-      $settings = Configuration::mergeConfigs(self::$defaultSettings, $settings);
-      $this->throwException = $settings['onErrorThrowException'];
-      $this->nullable = $settings['onErrorNull'];
+    if (isset($this->config['onErrorThrowException'])) {
+      $this->throwException = (bool) $this->config['onErrorThrowException'];
+    }
+
+    if (isset($this->config['onErrorNull'])) {
+      $this->nullable = (bool) $this->config['onErrorNull'];
+    }
+  }
+
+  /**
+   * Dynamic module reconfiguration
+   */
+  final public function onReconfigure()
+  {
+    $this->_initialize();
   }
 
   /**
@@ -225,26 +234,25 @@ class GherkinParam extends \Codeception\Extension
   /**
    * Capture suite's config before any execution
    *
-   * @param \Codeception\Event\SuiteEvent $e
+   * @param array $settings
    * @return void
    *
    * @codeCoverageIgnore
    * @ignore Codeception specific
    */
-  final public function beforeSuite(\Codeception\Event\SuiteEvent $e)
+  final public function _beforeSuite($settings = [])
   {
-    self::$suiteConfig = $e->getSettings();
+    self::$suiteConfig = $settings;
   }
 
   /**
    * Parse scenario's step before execution
    *
-   * @param \Codeception\Event\StepEvent $e
+   * @param \Codeception\Step $step
    * @return void
    */
-  final public function beforeStep(\Codeception\Event\StepEvent $e)
+  final public function _beforeStep(Step $step)
   {
-    $step = $e->getStep();
     // access to the protected property using reflection
     $refArgs = new ReflectionProperty(get_class($step), 'arguments');
     // change property accessibility to public

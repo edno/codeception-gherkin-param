@@ -1,22 +1,26 @@
-Feature: Handling Parametrized Gherkin Errors
+Feature: Handling Parametrized Gherkin Errors Nullable
   In order to create dynamic Gherkin scenario
   As a tester
   I want `null` value when the parameter is invalid
 
+Background:
+  Given The configuration parameter "onErrorNull" is set to 1
+  And The configuration parameter "onErrorThrowException" is set to 0
+
 @standard
-Scenario: Simple parameter does not exist
+Scenario: Simple parameter null when it does not exist
     Given I do not have a parameter "test"
     Then I should see "{{test}}" is null
 
 @table
-Scenario: Scenario parameter does not exist in a table
+Scenario: Scenario parameter null when it does not exist in a table
     Given I do not have a parameter "test"
     Then I should see null:
       | parameter  | is null    |
       | {{ test }} | true       |
 
 @table-with-helper
-Scenario: Table with helper and invalid parameter
+Scenario: Table with helper and invalid parameter null when it does not exist
     Given I do not have a parameter "test"
     When I have parameters
         | parameter | value      |
@@ -25,17 +29,17 @@ Scenario: Table with helper and invalid parameter
     Then I should see "{{param2}}" is null
 
 @array-invalid-name
-Scenario: Array does not exist
+Scenario: Array parameter null when it does not exist
     Given I do not have an array "test"
     Then I should see "{{test[9999]}}" is null
 
 @array-invalid-key
-Scenario: Array with invalid key
+Scenario: Array with invalid key null when it does not exist
     Given I have an array "test" with values [1, two, 3.14, IV, 101]
     Then I should see "{{test[9999]}}" is null
 
 @outline
-Scenario Outline: Outline example with parameter that does not exist
+Scenario Outline: Outline example with parameter null when it does not exist
     Given I do not have a parameter "parameter"
     Then I should see "<{{ parameter }}>" is null
     And I should see "{{<test>}}" is null
@@ -44,7 +48,7 @@ Scenario Outline: Outline example with parameter that does not exist
       | param     | 1010  |
 
 @config
-Scenario: Config key does not exist
+Scenario: Config key null when does not exist
     Given I have a configuration file "codeception.yml"
       """
       actor: Tester

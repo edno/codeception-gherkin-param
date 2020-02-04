@@ -1,7 +1,11 @@
-Feature: Handling Parametrized Gherkin Errors
+Feature: Handling Parametrized Gherkin Errors Defaulted
   In order to create dynamic Gherkin scenario
   As a tester
   I need to have consistent behaviour for error cases
+
+Background:
+  Given The configuration parameter "onErrorThrowException" is set to 0
+  And The configuration parameter "onErrorNullabe" is set to 0
 
 @standard
 Scenario: Simple parameter does not exist
