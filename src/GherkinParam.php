@@ -35,11 +35,11 @@ class GherkinParam extends \Codeception\Extension
    * false: default behaviour, ie replacement value is parameter {{name}} 
    */
   //TODO: implement nullable behaviour
-  private $nullable = true;
+  private $nullable = false;
 
   protected static $defaultSettings = [
-    'throwException' => false,
-    'nullable' => true
+    'onErrorThrowException' => false,
+    'onErrorNull' => false
   ];
 
   /**
@@ -75,8 +75,8 @@ class GherkinParam extends \Codeception\Extension
   public function __construct($settings = [])
   {
       $settings = Configuration::mergeConfigs(self::$defaultSettings, $settings);
-      $this->throwException = $settings['throwException'];
-      $this->nullable = $settings['nullable'];
+      $this->throwException = $settings['onErrorThrowException'];
+      $this->nullable = $settings['onErrorNull'];
   }
 
   /**
