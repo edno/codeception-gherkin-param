@@ -18,6 +18,7 @@ scenario.
 - PHP 7.x
 
 ## Installation
+
 The extension can be installed using [Composer](https://getcomposer.org)
 
 ```bash
@@ -26,32 +27,71 @@ $ composer require edno/codeception-gherkin-param --dev
 
 Be sure to enable the extension in `codeception.yml` as shown in
 [configuration](#configuration) below.
-## Configuration
+
+## Setup
+
 Enabling **Gherkin Param** is done in `codeception.yml`.
 
 ```yaml
-extensions:
+modules:
     enabled:
         - Codeception\Extension\GherkinParam
 ```
 
+> From version 2.0, **GherkinParam** is now a **module**.
+> If you are upgrading from 1.x to 2.x, then you'll have to update your Codeception configuration.
+
+## Configuration
+
+The version 2.x introduces two configuration parameters for customizing runtime behaviour when the scenario parameters are invalid or not initialized (see #23 and #26).
+
+> By default **GherkinParam**  behaviour is to keep the parameter string unchanged when the replacement value for a parameter cannot be found, ie the parameter does not exist or is not accessible.
+
+### `onErrorThrowException`
+
+If `true` then GherkinParam will throw a exception `GherkinParam` at runtime when a replacement value cannot be found for a parameter:
+
+```yaml
+modules:
+    enabled:
+        - Codeception\Extension\GherkinParam
+          onErrorThrowException: true
+```
+
+> If `onErrorThrowException` is set then it will override `onErrorNullable`.
+
+### `onErrorNullable`
+
+If `true` then GherkinParam will set to `null` parameters for which a replacement value cannot be found:
+
+```yaml
+modules:
+    enabled:
+        - Codeception\Extension\GherkinParam
+          onErrorNullable: true
+```
+
 ## Usage
+
 Once installed you will be able to access variables stored using
 [Fixtures](http://codeception.com/docs/reference/Fixtures).  
 
 ### Simple parameters
+
 In scenario steps, the variables can be accessed using the syntax `{{param}}`.  
 While executing your features the variables will be automatically replaced by their value.
 
 ### Array parameters
-From version 0.3, you can refer to an element in an array using the syntax `{{param[key]}}`.  
-If the key does not exist, then `null` is returned.
+
+You can refer to an element in an array using the syntax `{{param[key]}}`.  
 
 ### Test Suite Config parameters
-From version 0.3, you can refer to a test suite configuration parameter using the syntax `{{config:param}}`.  
-Note that the keyword **config:** is mandatory. If the config parameter does not exists, then `null` is returned.
+
+You can refer to a test suite configuration parameter using the syntax `{{config:param}}`.  
+Note that the keyword **config:** is mandatory.
 
 ## Example
+
 ```gherkin
 Feature: Parametrize Gherkin Feature
   In order to create dynamic Gherkin scenario
@@ -76,6 +116,7 @@ Feature: Parametrize Gherkin Feature
 ```
 
 The steps definition in `AcceptanceTester.php` do not require any change
+
 ```php
 /**
  * @Given I have a parameter :param with value :value
@@ -93,8 +134,9 @@ The steps definition in `AcceptanceTester.php` do not require any change
    $this->assertEquals($arg1, $arg2);
  }
 ```
+
  You can find more examples in the [test folder](https://github.com/edno/codeception-gherkin-param/tree/master/tests/acceptance).
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param?ref=badge_large)
