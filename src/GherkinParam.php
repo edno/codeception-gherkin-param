@@ -112,7 +112,7 @@ class GherkinParam extends \Codeception\Module
           elseif (preg_match(self::$regEx['array'], $variable)) {
             try {
               $values[] = $this->getValueFromArray($variable);
-            } catch(RuntimeException $e) {
+            } catch (RuntimeException $e) {
               if ($this->throwException) throw new GherkinParamException();
               if ($this->nullable) $values[] = null;
             }
@@ -121,7 +121,7 @@ class GherkinParam extends \Codeception\Module
           else {
             try {
               $values[] = Fixtures::get($variable);
-            } catch(RuntimeException $e) {
+            } catch (RuntimeException $e) {
               if ($this->throwException) throw new GherkinParamException();
               if ($this->nullable) $values[] = null;
             }
@@ -136,7 +136,7 @@ class GherkinParam extends \Codeception\Module
         // due to the default behavior when `search` and `replace` arrays size mismatch
         $param = $this->mapParametersToValues($matches, $values, $param);
 
-      } catch(GherkinParamException $e) {
+      } catch (GherkinParamException $e) {
         // only active if throwException setting is true
         throw new ExtensionException(
           $this, 
@@ -162,21 +162,29 @@ class GherkinParam extends \Codeception\Module
   final private function mapParametersToValues(array $matches, array $values, string $param)
   {
     $len = count($matches);
-    for ($i=0; $i<$len; $i++) {
+    for ($i = 0; $i < $len; $i++) {
       $search = $matches[$i];
       if (isset($values[$i])) {
         $replacement = $values[$i];
         if (is_array($replacement)) { 
           // case of replacement is an array (case of config param), ie param does not exists
-          if ($this->throwException) throw new GherkinParamException();
-          if ($this->nullable) $param = null;
+          if ($this->throwException) {
+            throw new GherkinParamException();
+          }
+          if ($this->nullable) {
+            $param = null;
+          }
           break;
         }
         //TODO: replace str_replace by strtr (performance)
         $param = str_replace($search, $replacement, $param);
       } else {
-        if ($this->throwException) throw new GherkinParamException();
-        if ($this->nullable) $param = null;
+        if ($this->throwException) {
+          throw new GherkinParamException();
+        }
+        if ($this->nullable) {
+          $param = null;
+        }
       }
     }
     return $param;
@@ -270,7 +278,7 @@ class GherkinParam extends \Codeception\Module
         $prop = new ReflectionProperty(get_class($arg), 'table');
         $prop->setAccessible(true);
         $table = $prop->getValue($arg);
-        foreach($table as $i => $row) {
+        foreach ($table as $i => $row) {
           foreach ($row as $j => $cell) {
             $val = $this->getValueFromParam($cell);
             $table[$i][$j] = $val ? $val : null; // issue TableNode does not support `null` values in table
