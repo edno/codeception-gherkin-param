@@ -19,6 +19,7 @@ use \RuntimeException;
 use \Codeception\Exception\ExtensionException;
 use \Codeception\Configuration;
 use \Codeception\Step;
+use \Codeception\Extension\GherkinParamException;
 
 class GherkinParam extends \Codeception\Module
 {
@@ -160,19 +161,19 @@ class GherkinParam extends \Codeception\Module
   //TODO: pass param ref to function (&) [performance]
   final private function mapParametersToValues(array $matches, array $values, string $param)
   {
-    //TODO: move count() into separate variable [performance]
-    for ($i=0; $i<count($matches); $i++) {
+    $len = count($matches);
+    for ($i=0; $i<$len; $i++) {
       $search = $matches[$i];
       if (isset($values[$i])) {
         $replacement = $values[$i];
-        if (\is_array($replacement)) { 
+        if (is_array($replacement)) { 
           // case of replacement is an array (case of config param), ie param does not exists
           if ($this->throwException) throw new GherkinParamException();
           if ($this->nullable) $param = null;
           break;
         }
         //TODO: replace str_replace by strtr (performance)
-        $param = \str_replace($search, $replacement, $param);
+        $param = str_replace($search, $replacement, $param);
       } else {
         if ($this->throwException) throw new GherkinParamException();
         if ($this->nullable) $param = null;
