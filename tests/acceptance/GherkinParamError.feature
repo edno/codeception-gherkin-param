@@ -9,29 +9,29 @@ Background:
 
 @standard
 Scenario: Simple parameter does not exist
-    Given I do not have a parameter "test"
-    Then I should see "{{test}}" equals "{{test}}"
+    Given I do not have a parameter "notaparam"
+    Then I should see "{{notaparam}}" equals "{{notaparam}}"
 
 @table
 Scenario: Scenario parameter does not exist in a table
-    Given I do not have a parameter "test"
+    Given I do not have a parameter "notaparam"
     Then I should see following:
       | parameter  | equals to  |
-      | {{ test }} | {{ test }} |
+      | {{ notaparam }} | {{ notaparam }} |
 
 @table-with-helper
 Scenario: Table with helper and invalid parameter
-    Given I do not have a parameter "test"
+    Given I do not have a parameter "notaparam"
     When I have parameters
         | parameter | value      |
         | param1    | Fix Helper |
-        | param2    | {{ test }} |
-    Then I should see "{{param2}}" equals "{{ test }}"
+        | param2    | {{ notaparam }} |
+    Then I should see "{{param2}}" equals "{{ notaparam }}"
 
 @array-invalid-name
 Scenario: Array does not exist
-    Given I do not have an array "test"
-    Then I should see "{{test[9999]}}" equals "{{test[9999]}}"
+    Given I do not have an array "notaparam"
+    Then I should see "{{notaparam[9999]}}" equals "{{notaparam[9999]}}"
 
 @array-invalid-key
 Scenario: Array with invalid key
@@ -40,9 +40,9 @@ Scenario: Array with invalid key
 
 @outline
 Scenario Outline: Outline example with parameter that does not exist
-    Given I do not have a parameter "parameter"
-    Then I should see "<{{ parameter }}>" equals "<{{ parameter }}>"
-    And I should see "{{<parameter>}}" equals "{{param}}"
+    Given I do not have a parameter "notaparam"
+    Then I should see "<{{ notaparam }}>" equals "<{{ notaparam }}>"
+    And I should see "{{<notaparam>}}" equals "{{<notaparam>}}"
 
     Examples:
       | parameter | value |

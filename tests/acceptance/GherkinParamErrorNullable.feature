@@ -9,29 +9,29 @@ Background:
 
 @standard
 Scenario: Simple parameter null when it does not exist
-    Given I do not have a parameter "test"
-    Then I should see "{{test}}" is null
+    Given I do not have a parameter "notaparam"
+    Then I should see "{{notaparam}}" is null
 
 @table
 Scenario: Scenario parameter null when it does not exist in a table
-    Given I do not have a parameter "test"
+    Given I do not have a parameter "notaparam"
     Then I should see null:
       | parameter  | is null    |
-      | {{ test }} | true       |
+      | {{ notaparam }} | true       |
 
 @table-with-helper
 Scenario: Table with helper and invalid parameter null when it does not exist
-    Given I do not have a parameter "test"
+    Given I do not have a parameter "notaparam"
     When I have parameters
         | parameter | value      |
         | param1    | Fix Helper |
-        | param2    | {{ test }} |
+        | param2    | {{ notaparam }} |
     Then I should see "{{param2}}" is null
 
 @array-invalid-name
 Scenario: Array parameter null when it does not exist
-    Given I do not have an array "test"
-    Then I should see "{{test[9999]}}" is null
+    Given I do not have an array "notaparam"
+    Then I should see "{{notaparam[9999]}}" is null
 
 @array-invalid-key
 Scenario: Array with invalid key null when it does not exist
@@ -40,9 +40,9 @@ Scenario: Array with invalid key null when it does not exist
 
 @outline
 Scenario Outline: Outline example with parameter null when it does not exist
-    Given I do not have a parameter "parameter"
-    Then I should see "<{{ parameter }}>" is null
-    And I should see "{{<test>}}" is null
+    Given I do not have a parameter "notaparam"
+    Then I should see "<{{ notaparam }}>" is null
+    And I should see "{{<notaparam>}}" is null
     Examples:
       | parameter | value |
       | param     | 1010  |
