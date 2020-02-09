@@ -26,6 +26,6 @@ coverage:
         include:
             - src/*
 
-extensions:
+modules:
     enabled:
         - Codeception\Extension\GherkinParam

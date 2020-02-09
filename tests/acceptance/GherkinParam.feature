@@ -22,7 +22,7 @@ Feature: Parametrize Gherkin Feature
       | {{ another_param }} | 3.14           |
 
   Scenario Outline: Scenario using example
-    Given I have a parameter "test" with value "param"
+    Given I have a parameter "test" with value "parameter"
     And I have a parameter "<parameter>" with value "<value>"
     Then I should see "{{<parameter>}}" equals "<value>"
 

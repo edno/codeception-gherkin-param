@@ -1,0 +1,22 @@
+{
+  "timeout": 10,
+  "source": {
+    "directories": [
+      "src"
+    ]
+  },
+  "logs": {
+    "text": "tests/_output/infection/infection.log",
+    "summary": "tests/_output/infection/summary.log",
+    "perMutator": "tests/_output/infection/per-mutator.md",
+    "badge": {
+      "branch": "master"
+    }
+  },
+  "tmpDir": "tests/_output/tmp",
+  "mutators": {
+    "@default": true,
+    "@function_signature": false
+  },
+  "testFramework": "codeception"
+}
