@@ -140,7 +140,7 @@ class GherkinParam extends \Codeception\Module
         // only active if throwException setting is true
         throw new ExtensionException(
           $this, 
-          "Incorrect parameter name ${param}, or not initialized"
+          "Incorrect parameter `${param}` variable `${variable}` not found, or not initialized"
         );
       }
     
