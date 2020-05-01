@@ -11,15 +11,15 @@
       }
   ],
   "require": {
-    "php": ">=7.2",
-    "codeception/codeception": ">=3"
+    "php": "~7.2",
+    "codeception/codeception": "3 - 4"
   },
   "require-dev": {
-    "php-coveralls/php-coveralls": "^2",
+    "php- coveralls/php-coveralls": "^2",
     "codeception/module-asserts": "^1",
-    "infection/infection": ">=0.15",
-    "infection/codeception-adapter": "^0.3",
-    "infection/extension-installer": "^0.1"
+    "infection/infection": "~0.15",
+    "infection/codeception-adapter": "~0.3",
+    "infection/extension-installer": "~0.1"
   },
   "autoload": {
     "psr-4": {
