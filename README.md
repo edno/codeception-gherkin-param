@@ -44,7 +44,7 @@ modules:
 
 ## Configuration
 
-The version 2.x introduces two configuration parameters for customizing runtime behaviour when the scenario parameters are invalid or not initialized (see #23 and #26).
+The version 2 introduces two new configuration parameters for customizing runtime behaviour when the scenario parameters are invalid or not initialized (see PR#23 and PR#26).
 
 > By default **GherkinParam**  behaviour is to keep the parameter string unchanged when the replacement value for a parameter cannot be found, ie the parameter does not exist or is not accessible.
 
