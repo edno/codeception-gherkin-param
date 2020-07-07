@@ -1,7 +1,7 @@
 {
   "name": "edno/codeception-gherkin-param",
   "description": "Codeception module for supporting parameter notation in Gherkin features",
-  "keywords": ["codeception", "extension", "gherkin"],
+  "keywords": ["codeception", "extension", "gherkin", "bdd", "module", "test"],
   "homepage": "https://github.com/edno/codeception-gherkin-param",
   "license": "Apache-2.0",
   "authors": [
