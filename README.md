@@ -9,7 +9,7 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/master/LICENSE)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param?ref=badge_shield)
 
-The [Codeception](http://codeception.com/) extension for supporting parameter notation
+The [Codeception](http://codeception.com/) module for supporting parameter notation
 in [Gherkin](https://github.com/Codeception/Codeception/blob/master/docs/07-BDD.md)
 scenario.
 
@@ -20,13 +20,13 @@ scenario.
 
 ## Installation
 
-The extension can be installed using [Composer](https://getcomposer.org)
+The module can be installed using [Composer](https://getcomposer.org)
 
 ```bash
 $ composer require edno/codeception-gherkin-param --dev
 ```
 
-Be sure to enable the extension in `codeception.yml` as shown in
+Be sure to enable the module in `codeception.yml` as shown in
 [configuration](#configuration) below.
 
 ## Setup
