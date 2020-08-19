@@ -11,7 +11,7 @@
       }
   ],
   "require": {
-    "php": "~7.2",
+    "php": ">=7.2",
     "codeception/codeception": "3 - 5"
   },
   "require-dev": {
