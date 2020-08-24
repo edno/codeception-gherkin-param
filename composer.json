@@ -17,7 +17,7 @@
   "require-dev": {
     "php-coveralls/php-coveralls": "^2",
     "codeception/module-asserts": "^1",
-    "infection/infection": "^0.17.2",
+    "infection/infection": ">=0.15",
     "infection/codeception-adapter": "~0.3",
     "infection/extension-installer": "~0.1"
   },
