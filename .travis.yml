@@ -4,10 +4,6 @@ branches:
   only:
     - main
 
-env:
-  global:
-      - XDEBUG_MODE=coverage
-
 php:
   - 7.2
   - 7.3
@@ -23,4 +19,4 @@ before_script:
   - composer install
 
 script:
-  - "./vendor/bin/codecept run -q --no-colors --coverage-xml"
+  - "./vendor/bin/codecept run -q --no-colors"
