@@ -2,9 +2,7 @@ language: php
 
 branches:
   only:
-    - master
-    - 2.x
-    - 1.x
+    - main
 
 env:
   global:
