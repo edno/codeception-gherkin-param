@@ -23,7 +23,7 @@ scenario.
 The module can be installed using [Composer](https://getcomposer.org)
 
 ```bash
-$ composer require edno/codeception-gherkin-param --dev
+composer require edno/codeception-gherkin-param --dev
 ```
 
 Be sure to enable the module in `codeception.yml` as shown in
