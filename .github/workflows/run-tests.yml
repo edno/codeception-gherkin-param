@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Package Tests
 
 on: [push]
 
@@ -16,8 +16,8 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
     - name: Run test suite
-      run: ./vendor/bin/codecept run --coverage-xml
+      run: ./vendor/bin/codecept run -q --no-colors --coverage-xml
+
+    - name: Run mutation tests
+      run: ./vendor/bin/infection --min-covered-msi=70 --threads=4 --no-progress --log-verbosity="none"
