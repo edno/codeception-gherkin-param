@@ -4,6 +4,10 @@ branches:
   only:
     - master
 
+env:
+  global:
+      - XDEBUG_MODE=coverage
+
 php:
   - 7.2
   - 7.3
