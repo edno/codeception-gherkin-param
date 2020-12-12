@@ -21,3 +21,6 @@ jobs:
 
     - name: Run mutation tests
       run: ./vendor/bin/infection --min-covered-msi=70 --threads=4 --no-progress --log-verbosity="none"
+
+    - name: Run Coveralls reporting
+      run: ./vendor/bin/php-coveralls
