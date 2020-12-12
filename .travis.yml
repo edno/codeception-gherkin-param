@@ -23,7 +23,7 @@ before_script:
   - composer install
 
 script:
-  - "./vendor/bin/codecept run -o 'settings: shuffle: true' -q --no-colors --coverage-xml"
+  - "./vendor/bin/codecept run -q --no-colors --coverage-xml"
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.4" ]]; then ./vendor/bin/infection --min-covered-msi=70 --threads=4 --no-progress --log-verbosity="none"; fi
 
 after_script:
