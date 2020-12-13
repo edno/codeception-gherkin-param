@@ -10,10 +10,6 @@ php:
   - 7.4
   - 8.0
 
-jobs:
-  allow_failures:
-    - php: 8.0
-
 before_script:
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" || ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then composer require --no-interaction --dev composer/package-versions-deprecated; fi
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "8.0" ]]; then composer remove --no-interaction --dev infection/infection infection/codeception-adapter infection/extension-installer; fi
