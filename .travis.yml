@@ -15,8 +15,9 @@ jobs:
     - php: 8.0
 
 before_script:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" || ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then composer require --dev composer/package-versions-deprecated; fi
-  - composer install
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" || ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then composer require --no-interaction --dev composer/package-versions-deprecated; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "8.0" ]]; then composer remove --no-interaction --dev infection/infection infection/codeception-adapter infection/extension-installer; fi
+  - composer install --no-interaction
 
 script:
   - "./vendor/bin/codecept run -q --no-colors"
