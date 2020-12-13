@@ -16,7 +16,7 @@ scenario.
 ## Minimum Requirements
 
 - Codeception 3.x, 4.x
-- PHP 7.2 - 7.4
+- PHP 7.2 - 8.0
 
 ## Installation
 
