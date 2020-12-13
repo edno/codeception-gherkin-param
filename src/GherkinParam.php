@@ -177,7 +177,7 @@ class GherkinParam extends \Codeception\Module
           break;
         }
         //TODO: replace str_replace by strtr (performance)
-        $param = str_replace($search, $replacement, $param);
+        $param = str_replace($search, strval($replacement), $param);
       } else {
         if ($this->throwException) {
           throw new GherkinParamException();
