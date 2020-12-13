@@ -159,7 +159,7 @@ class GherkinParam extends \Codeception\Module
    * @return \mixed|null Returns parameter's value if exists, else parameter {{name}}
    */  
   //TODO: pass param ref to function (&) [performance]
-  final private function mapParametersToValues(array $matches, array $values, string $param)
+  private function mapParametersToValues(array $matches, array $values, string $param)
   {
     $len = count($matches);
     for ($i = 0; $i < $len; $i++) {
@@ -177,7 +177,7 @@ class GherkinParam extends \Codeception\Module
           break;
         }
         //TODO: replace str_replace by strtr (performance)
-        $param = str_replace($search, $replacement, $param);
+        $param = str_replace($search, strval($replacement), $param);
       } else {
         if ($this->throwException) {
           throw new GherkinParamException();
