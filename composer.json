@@ -5,10 +5,10 @@
   "homepage": "https://github.com/edno/codeception-gherkin-param",
   "license": "Apache-2.0",
   "authors": [
-      {
-        "name": "Gregory Heitz",
-        "email": "edno@edno.io"
-      }
+    {
+      "name": "Gregory Heitz",
+      "email": "edno@edno.io"
+    }
   ],
   "require": {
     "php": ">=7.2 <9.0",
@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-	  "Codeception\\Extension\\": "src/"
+      "Codeception\\Extension\\": "src/"
     }
   },
   "minimum-stability": "dev",
