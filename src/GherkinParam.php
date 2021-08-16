@@ -42,6 +42,8 @@ use \Codeception\Extension\GherkinParamException;
  * @link     https://packagist.org/packages/edno/codeception-gherkin-param
  *
  * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ * @SuppressWarnings(PHPMD.CamelCaseVariableName)
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class GherkinParam extends \Codeception\Module
 {
@@ -149,7 +151,7 @@ class GherkinParam extends \Codeception\Module
                     // config case
                     if (preg_match(self::$_regEx['config'], $variable)) {
                         $values[] = $this->getValueFromConfig($variable);
-                        break;
+                        continue;
                     } elseif (preg_match(self::$_regEx['array'], $variable)) {
                         // array case
                         try {
@@ -162,7 +164,7 @@ class GherkinParam extends \Codeception\Module
                                 $values[] = null;
                             }
                         }
-                        break;
+                        continue;
                     } 
                     // normal case
                     try {
@@ -229,20 +231,20 @@ class GherkinParam extends \Codeception\Module
                         throw new GherkinParamException();
                     } 
                     if ($this->_nullable) {
-                        return null;
+                        $param = null;
                     }
                     break;
                 }
                 //TODO: replace str_replace by strtr (performance)
-                return str_replace($search, strval($replacement), $param);
-            }
+                $param = str_replace($search, strval($replacement), $param);
+                continue;
+            } 
 
             if ($this->_throwException) {
                 throw new GherkinParamException();
             } elseif ($this->_nullable) {
-                return null;
+                $param = null;
             }
-
         }
         return $param;
     }
@@ -267,8 +269,10 @@ class GherkinParam extends \Codeception\Module
                 $value = $config[$arg];
                 if (is_array($value)) {
                     $config = $value;
-                }
-                return $value;
+                    continue;
+                } 
+                    return $value;
+                
             }
         }
         return $value;
