@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -18,10 +17,13 @@ jobs:
 
     - name: Run test suite
       run: ./vendor/bin/codecept run -q --no-colors --coverage-xml
+      env:
+        XDEBUG_MODE: coverage
 
     - name: Run mutation tests
       run: ./vendor/bin/infection --min-covered-msi=70 --threads=4 --no-progress --log-verbosity="none"
       env:
+        XDEBUG_MODE: coverage
         STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
 
     - name: Run Coveralls reporting
