@@ -1,5 +1,7 @@
 {
   "cSpell.words": [
-    "phpmd"
+    "codesniffer",
+    "phpmd",
+    "squizlabs"
   ]
 }
