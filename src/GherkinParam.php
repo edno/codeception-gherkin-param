@@ -21,11 +21,16 @@ use \Codeception\Configuration;
 use \Codeception\Step;
 use \Codeception\Extension\GherkinParamException;
 
+  /**
+    * Suppress CamelCaseMethodName warning
+    * Camel case methods are part of the Codeception Extension API lifecyle
+    * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+   */
 class GherkinParam extends \Codeception\Module
 {
  
   /**
-   * @var boolean Flag to enable exception (prioritised over $nullable=true)
+   * @var boolean Flag to enable exception (prioritized over $nullable=true)
    * false: no exception thrown if parameter invalid, instead replacement value is parameter {{name}} 
    * true: exception thrown if parameter invalid
    */
@@ -95,6 +100,8 @@ class GherkinParam extends \Codeception\Module
    * @param string $param
    *
    * @return \mixed|null Returns parameter's value if exists, else parameter's name
+   *
+   * @SuppressWarnings(PHPMD.StaticAccess)
    */
   final protected function getValueFromParam(string $param)
   {
@@ -107,6 +114,7 @@ class GherkinParam extends \Codeception\Module
           // config case
           if (preg_match(self::$regEx['config'], $variable)) {
             $values[] = $this->getValueFromConfig($variable);
+            break;
           } 
           // array case
           elseif (preg_match(self::$regEx['array'], $variable)) {
@@ -116,15 +124,14 @@ class GherkinParam extends \Codeception\Module
               if ($this->throwException) throw new GherkinParamException();
               if ($this->nullable) $values[] = null;
             }
+            break;
           } 
           // normal case
-          else {
-            try {
-              $values[] = Fixtures::get($variable);
-            } catch (RuntimeException $e) {
-              if ($this->throwException) throw new GherkinParamException();
-              if ($this->nullable) $values[] = null;
-            }
+          try {
+            $values[] = Fixtures::get($variable);
+          } catch (RuntimeException $e) {
+            if ($this->throwException) throw new GherkinParamException();
+            if ($this->nullable) $values[] = null;
           }
           // if machting value return is not found (null)
           if (is_null(end($values))) {
@@ -172,20 +179,21 @@ class GherkinParam extends \Codeception\Module
             throw new GherkinParamException();
           }
           if ($this->nullable) {
-            $param = null;
+            return null;
           }
           break;
         }
         //TODO: replace str_replace by strtr (performance)
-        $param = str_replace($search, strval($replacement), $param);
-      } else {
-        if ($this->throwException) {
-          throw new GherkinParamException();
-        }
-        if ($this->nullable) {
-          $param = null;
-        }
+        return str_replace($search, strval($replacement), $param);
       }
+
+      if ($this->throwException) {
+        throw new GherkinParamException();
+      }
+      if ($this->nullable) {
+        return null;
+      }
+
     }
     return $param;
   }
@@ -209,9 +217,8 @@ class GherkinParam extends \Codeception\Module
         $value = $config[$arg];
         if (is_array($value)) {
           $config = $value;
-        } else {
-          break;
         }
+        return $value;
       }
     }
     return $value;
@@ -223,6 +230,8 @@ class GherkinParam extends \Codeception\Module
    * @param string $param
    *
    * @return \mixed|null Returns parameter's value if exists, else null
+   *
+   * @SuppressWarnings(PHPMD.StaticAccess)
    */
   //TODO: pass param ref to function (&) [performance]
   final protected function getValueFromArray(string $param)

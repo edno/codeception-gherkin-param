@@ -19,7 +19,8 @@
     "php-coveralls/php-coveralls": "^2",
     "codeception/module-asserts": "^1",
     "infection/infection": "^0.24",
-    "infection/codeception-adapter": "^0.3.4"
+    "infection/codeception-adapter": "^0.3.4",
+    "phpmd/phpmd" : "@stable"
   },
   "autoload": {
     "psr-4": {
