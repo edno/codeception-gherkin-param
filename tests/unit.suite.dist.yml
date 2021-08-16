@@ -1,0 +1,9 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit tests.
+
+class_name: UnitTester
+
+modules:
+  enabled:
+    - Asserts
