@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php": ">=7.2 <9.0",
+    "php": ">=7.4 <9.0",
     "codeception/codeception": "3 - 5",
     "composer-runtime-api": "^2.0"
   },
