@@ -18,5 +18,6 @@
     "@default": true,
     "@function_signature": false
   },
-  "testFramework": "codeception"
+  "testFramework": "codeception",
+  "testFrameworkOptions": "acceptance" 
 }

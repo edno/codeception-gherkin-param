@@ -1,0 +1,516 @@
+Codeception PHP Testing Framework v4.1.22
+Powered by PHPUnit 9.5.8 by Sebastian Bergmann and contributors.
+[Seed] 1798994215
+
+[36m  Rebuilding AcceptanceTester...[39m
+
+[1mAcceptance Tests (1) [22m---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Modules: [32mAsserts, \Helper\ConfigHelper, \Helper\Acceptance, \Helper\ExtHelper, \Codeception\Extension\GherkinParam[39m
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[35;1mGherkinParamExceptionCest:[39;22m Try to test
+Signature: [32mGherkinParamExceptionCest:tryToTest[39m
+Test: [32mtests/acceptance/GherkinParamExceptionCest.php:tryToTest[39m
+[33mScenario --[39m
+[1m I [22mget gherkin param 
+[36m  Codeception\Extension\GherkinParam Object
+  (
+      [_throwException:Codeception\Extension\GherkinParam:private] => 
+      [_nullable:Codeception\Extension\GherkinParam:private] => 
+      [config:protected] => Array
+          (
+              [0] => onErrorThrowException
+              [1] => onErrorNull
+          )
+  
+      [requiredFields:protected] => Array
+          (
+          )
+  
+      [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+          (
+              [config:Codeception\Lib\ModuleContainer:private] => Array
+                  (
+                      [class_name] => AcceptanceTester
+                      [modules] => Array
+                          (
+                              [enabled] => Array
+                                  (
+                                      [0] => Asserts
+                                      [1] => Helper\ConfigHelper
+                                      [2] => Helper\Acceptance
+                                      [3] => Helper\ExtHelper
+                                      [4] => Codeception\Extension\GherkinParam
+                                  )
+  
+                              [config] => Array
+                                  (
+                                  )
+  
+                              [depends] => Array
+                                  (
+                                  )
+  
+                          )
+  
+                      [some_param] => 42
+                      [colors] => 1
+                      [shuffle] => 1
+                      [memory_limit] => 512M
+                      [strict_xml] => 1
+                      [my_param] => Array
+                          (
+                              [user] => mylogin
+                              [password] => mypassword
+                          )
+  
+                      [my_array] => Array
+                          (
+                              [0] => Array
+                                  (
+                                      [user] => user_in_array
+                                  )
+  
+                          )
+  
+                      [my_edgecase] => Array
+                          (
+                              [0] => Array
+                                  (
+                                      [user] => edgecase
+                                  )
+  
+                          )
+  
+                      [bootstrap] => 
+                      [lint] => 1
+                      [backup_globals] => 1
+                      [log_incomplete_skipped] => 
+                      [report_useless_tests] => 
+                      [disallow_test_output] => 
+                      [be_strict_about_changes_to_global_state] => 
+                      [coverage] => Array
+                          (
+                              [enabled] => 1
+                              [whitelist] => Array
+                                  (
+                                      [include] => Array
+                                          (
+                                              [0] => src/*
+                                          )
+  
+                                  )
+  
+                          )
+  
+                      [namespace] => 
+                      [groups] => Array
+                          (
+                          )
+  
+                      [gherkin] => Array
+                          (
+                          )
+  
+                      [extensions] => Array
+                          (
+                              [enabled] => Array
+                                  (
+                                  )
+  
+                              [config] => Array
+                                  (
+                                  )
+  
+                              [commands] => Array
+                                  (
+                                  )
+  
+                          )
+  
+                      [actor] => AcceptanceTester
+                      [step_decorators] => Codeception\Step\ConditionalAssertion
+                      [path] => /Users/gregory.heitz/Workspace/Github/codeception-gherkin-param/tests/acceptance/
+                      [extends] => 
+                      [formats] => Array
+                          (
+                          )
+  
+                      [error_level] => E_ALL & ~E_STRICT & ~E_DEPRECATED
+                  )
+  
+              [di:Codeception\Lib\ModuleContainer:private] => Codeception\Lib\Di Object
+                  (
+                      [container:protected] => Array
+                          (
+                              [Codeception\Lib\ModuleContainer] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                              [Codeception\Module\Asserts] => Codeception\Module\Asserts Object
+                                  (
+                                      [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                                      [storage:protected] => Array
+                                          (
+                                          )
+  
+                                      [config:protected] => Array
+                                          (
+                                          )
+  
+                                      [backupConfig:protected] => Array
+                                          (
+                                          )
+  
+                                      [requiredFields:protected] => Array
+                                          (
+                                          )
+  
+                                  )
+  
+                              [Helper\ConfigHelper] => Helper\ConfigHelper Object
+                                  (
+                                      [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                                      [storage:protected] => Array
+                                          (
+                                          )
+  
+                                      [config:protected] => Array
+                                          (
+                                          )
+  
+                                      [backupConfig:protected] => Array
+                                          (
+                                          )
+  
+                                      [requiredFields:protected] => Array
+                                          (
+                                          )
+  
+                                  )
+  
+                              [Helper\Acceptance] => Helper\Acceptance Object
+                                  (
+                                      [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                                      [storage:protected] => Array
+                                          (
+                                          )
+  
+                                      [config:protected] => Array
+                                          (
+                                          )
+  
+                                      [backupConfig:protected] => Array
+                                          (
+                                          )
+  
+                                      [requiredFields:protected] => Array
+                                          (
+                                          )
+  
+                                  )
+  
+                              [Helper\ExtHelper] => Helper\ExtHelper Object
+                                  (
+                                      [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                                      [storage:protected] => Array
+                                          (
+                                          )
+  
+                                      [config:protected] => Array
+                                          (
+                                          )
+  
+                                      [backupConfig:protected] => Array
+                                          (
+                                          )
+  
+                                      [requiredFields:protected] => Array
+                                          (
+                                          )
+  
+                                  )
+  
+                              [Codeception\Extension\GherkinParam] => Codeception\Extension\GherkinParam Object
+   *RECURSION*
+                          )
+  
+                      [fallback:protected] => 
+                  )
+  
+              [modules:Codeception\Lib\ModuleContainer:private] => Array
+                  (
+                      [Asserts] => Codeception\Module\Asserts Object
+                          (
+                              [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                              [storage:protected] => Array
+                                  (
+                                  )
+  
+                              [config:protected] => Array
+                                  (
+                                  )
+  
+                              [backupConfig:protected] => Array
+                                  (
+                                  )
+  
+                              [requiredFields:protected] => Array
+                                  (
+                                  )
+  
+                          )
+  
+                      [Helper\ConfigHelper] => Helper\ConfigHelper Object
+                          (
+                              [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                              [storage:protected] => Array
+                                  (
+                                  )
+  
+                              [config:protected] => Array
+                                  (
+                                  )
+  
+                              [backupConfig:protected] => Array
+                                  (
+                                  )
+  
+                              [requiredFields:protected] => Array
+                                  (
+                                  )
+  
+                          )
+  
+                      [Helper\Acceptance] => Helper\Acceptance Object
+                          (
+                              [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                              [storage:protected] => Array
+                                  (
+                                  )
+  
+                              [config:protected] => Array
+                                  (
+                                  )
+  
+                              [backupConfig:protected] => Array
+                                  (
+                                  )
+  
+                              [requiredFields:protected] => Array
+                                  (
+                                  )
+  
+                          )
+  
+                      [Helper\ExtHelper] => Helper\ExtHelper Object
+                          (
+                              [moduleContainer:protected] => Codeception\Lib\ModuleContainer Object
+   *RECURSION*
+                              [storage:protected] => Array
+                                  (
+                                  )
+  
+                              [config:protected] => Array
+                                  (
+                                  )
+  
+                              [backupConfig:protected] => Array
+                                  (
+                                  )
+  
+                              [requiredFields:protected] => Array
+                                  (
+                                  )
+  
+                          )
+  
+                      [Codeception\Extension\GherkinParam] => Codeception\Extension\GherkinParam Object
+   *RECURSION*
+                  )
+  
+              [active:Codeception\Lib\ModuleContainer:private] => Array
+                  (
+                      [Asserts] => 1
+                      [Helper\ConfigHelper] => 1
+                      [Helper\Acceptance] => 1
+                      [Helper\ExtHelper] => 1
+                      [Codeception\Extension\GherkinParam] => 1
+                  )
+  
+              [actions:Codeception\Lib\ModuleContainer:private] => Array
+                  (
+                      [expectException] => Asserts
+                      [expectThrowable] => Asserts
+                      [assertFileNotExists] => Asserts
+                      [assertGreaterOrEquals] => Asserts
+                      [assertIsEmpty] => Asserts
+                      [assertLessOrEquals] => Asserts
+                      [assertNotRegExp] => Asserts
+                      [assertRegExp] => Asserts
+                      [assertThatItsNot] => Asserts
+                      [assertArrayHasKey] => Asserts
+                      [assertArrayNotHasKey] => Asserts
+                      [assertClassHasAttribute] => Asserts
+                      [assertClassHasStaticAttribute] => Asserts
+                      [assertClassNotHasAttribute] => Asserts
+                      [assertClassNotHasStaticAttribute] => Asserts
+                      [assertContains] => Asserts
+                      [assertContainsEquals] => Asserts
+                      [assertContainsOnly] => Asserts
+                      [assertContainsOnlyInstancesOf] => Asserts
+                      [assertCount] => Asserts
+                      [assertDirectoryDoesNotExist] => Asserts
+                      [assertDirectoryExists] => Asserts
+                      [assertDirectoryIsNotReadable] => Asserts
+                      [assertDirectoryIsNotWritable] => Asserts
+                      [assertDirectoryIsReadable] => Asserts
+                      [assertDirectoryIsWritable] => Asserts
+                      [assertDoesNotMatchRegularExpression] => Asserts
+                      [assertEmpty] => Asserts
+                      [assertEquals] => Asserts
+                      [assertEqualsCanonicalizing] => Asserts
+                      [assertEqualsIgnoringCase] => Asserts
+                      [assertEqualsWithDelta] => Asserts
+                      [assertFalse] => Asserts
+                      [assertFileDoesNotExist] => Asserts
+                      [assertFileEquals] => Asserts
+                      [assertFileEqualsCanonicalizing] => Asserts
+                      [assertFileEqualsIgnoringCase] => Asserts
+                      [assertFileExists] => Asserts
+                      [assertFileIsNotReadable] => Asserts
+                      [assertFileIsNotWritable] => Asserts
+                      [assertFileIsReadable] => Asserts
+                      [assertFileIsWritable] => Asserts
+                      [assertFileNotEquals] => Asserts
+                      [assertFileNotEqualsCanonicalizing] => Asserts
+                      [assertFileNotEqualsIgnoringCase] => Asserts
+                      [assertFinite] => Asserts
+                      [assertGreaterThan] => Asserts
+                      [assertGreaterThanOrEqual] => Asserts
+                      [assertInfinite] => Asserts
+                      [assertInstanceOf] => Asserts
+                      [assertIsArray] => Asserts
+                      [assertIsBool] => Asserts
+                      [assertIsCallable] => Asserts
+                      [assertIsClosedResource] => Asserts
+                      [assertIsFloat] => Asserts
+                      [assertIsInt] => Asserts
+                      [assertIsIterable] => Asserts
+                      [assertIsNotArray] => Asserts
+                      [assertIsNotBool] => Asserts
+                      [assertIsNotCallable] => Asserts
+                      [assertIsNotClosedResource] => Asserts
+                      [assertIsNotFloat] => Asserts
+                      [assertIsNotInt] => Asserts
+                      [assertIsNotIterable] => Asserts
+                      [assertIsNotNumeric] => Asserts
+                      [assertIsNotObject] => Asserts
+                      [assertIsNotReadable] => Asserts
+                      [assertIsNotResource] => Asserts
+                      [assertIsNotScalar] => Asserts
+                      [assertIsNotString] => Asserts
+                      [assertIsNotWritable] => Asserts
+                      [assertIsNumeric] => Asserts
+                      [assertIsObject] => Asserts
+                      [assertIsReadable] => Asserts
+                      [assertIsResource] => Asserts
+                      [assertIsScalar] => Asserts
+                      [assertIsString] => Asserts
+                      [assertIsWritable] => Asserts
+                      [assertJson] => Asserts
+                      [assertJsonFileEqualsJsonFile] => Asserts
+                      [assertJsonFileNotEqualsJsonFile] => Asserts
+                      [assertJsonStringEqualsJsonFile] => Asserts
+                      [assertJsonStringEqualsJsonString] => Asserts
+                      [assertJsonStringNotEqualsJsonFile] => Asserts
+                      [assertJsonStringNotEqualsJsonString] => Asserts
+                      [assertLessThan] => Asserts
+                      [assertLessThanOrEqual] => Asserts
+                      [assertMatchesRegularExpression] => Asserts
+                      [assertNan] => Asserts
+                      [assertNotContains] => Asserts
+                      [assertNotContainsEquals] => Asserts
+                      [assertNotContainsOnly] => Asserts
+                      [assertNotCount] => Asserts
+                      [assertNotEmpty] => Asserts
+                      [assertNotEquals] => Asserts
+                      [assertNotEqualsCanonicalizing] => Asserts
+                      [assertNotEqualsIgnoringCase] => Asserts
+                      [assertNotEqualsWithDelta] => Asserts
+                      [assertNotFalse] => Asserts
+                      [assertNotInstanceOf] => Asserts
+                      [assertNotNull] => Asserts
+                      [assertNotSame] => Asserts
+                      [assertNotSameSize] => Asserts
+                      [assertNotTrue] => Asserts
+                      [assertNull] => Asserts
+                      [assertObjectHasAttribute] => Asserts
+                      [assertObjectNotHasAttribute] => Asserts
+                      [assertSame] => Asserts
+                      [assertSameSize] => Asserts
+                      [assertStringContainsString] => Asserts
+                      [assertStringContainsStringIgnoringCase] => Asserts
+                      [assertStringEndsNotWith] => Asserts
+                      [assertStringEndsWith] => Asserts
+                      [assertStringEqualsFile] => Asserts
+                      [assertStringEqualsFileCanonicalizing] => Asserts
+                      [assertStringEqualsFileIgnoringCase] => Asserts
+                      [assertStringMatchesFormat] => Asserts
+                      [assertStringMatchesFormatFile] => Asserts
+                      [assertStringNotContainsString] => Asserts
+                      [assertStringNotContainsStringIgnoringCase] => Asserts
+                      [assertStringNotEqualsFile] => Asserts
+                      [assertStringNotEqualsFileCanonicalizing] => Asserts
+                      [assertStringNotEqualsFileIgnoringCase] => Asserts
+                      [assertStringNotMatchesFormat] => Asserts
+                      [assertStringNotMatchesFormatFile] => Asserts
+                      [assertStringStartsNotWith] => Asserts
+                      [assertStringStartsWith] => Asserts
+                      [assertThat] => Asserts
+                      [assertTrue] => Asserts
+                      [assertXmlFileEqualsXmlFile] => Asserts
+                      [assertXmlFileNotEqualsXmlFile] => Asserts
+                      [assertXmlStringEqualsXmlFile] => Asserts
+                      [assertXmlStringEqualsXmlString] => Asserts
+                      [assertXmlStringNotEqualsXmlFile] => Asserts
+                      [assertXmlStringNotEqualsXmlString] => Asserts
+                      [fail] => Asserts
+                      [markTestIncomplete] => Asserts
+                      [markTestSkipped] => Asserts
+                      [setConfigParam] => Helper\ConfigHelper
+                      [getGherkinParam] => Helper\ConfigHelper
+                      [iHaveParams] => Helper\Acceptance
+                      [iHaveArray] => Helper\Acceptance
+                      [iDoNotHaveArray] => Helper\Acceptance
+                      [iHaveConfigDoNothing] => Helper\ExtHelper
+                      [iExecuteScenarioDoNothing] => Helper\ExtHelper
+                      [onReconfigure] => Codeception\Extension\GherkinParam
+                  )
+  
+          )
+  
+      [storage:protected] => Array
+          (
+          )
+  
+      [backupConfig:protected] => Array
+          (
+              [0] => onErrorThrowException
+              [1] => onErrorNull
+          )
+  
+  )
+  [39m
+[32;1m PASSED [39;22m
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Time: 00:00.024, Memory: 12.00 MB
+
+[30;42mOK (1 test, 0 assertions)[0m

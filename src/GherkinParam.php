@@ -156,7 +156,7 @@ class GherkinParam extends \Codeception\Module
                         // array case
                         try {
                               $values[] = $this->getValueFromArray($variable);
-                        } catch (RuntimeException $exception) {
+                        } catch (RuntimeException | TypeError $exception) {
                             if ($this->_throwException) { 
                                 throw new GherkinParamException();
                             } 
@@ -242,7 +242,8 @@ class GherkinParam extends \Codeception\Module
 
             if ($this->_throwException) {
                 throw new GherkinParamException();
-            } elseif ($this->_nullable) {
+            }
+            if ($this->_nullable) {
                 $param = null;
             }
         }
@@ -292,12 +293,13 @@ class GherkinParam extends \Codeception\Module
     final protected function getValueFromArray(string $param)
     {
         $value = null;
-
+ 
         preg_match_all(self::$_regEx['array'], $param, $args);
         $array = Fixtures::get($args['var'][0]);
         if (array_key_exists($args['key'][0], $array)) {
             $value = $array[$args['key'][0]];
         }
+
         return $value;
     }
 
