@@ -104,12 +104,15 @@ class GherkinParam extends \Codeception\Module
      * Initialize module configuration
      *
      * @return void
+     *
+     * @phpcs:disable PEAR.NamingConventions.ValidFunctionName.PublicUnderscore
      */
     final public function _initialize() 
     {
         if (isset($this->config['onErrorThrowException'])) {
             $this->_throwException = (bool) $this->config['onErrorThrowException'];
-        } elseif (isset($this->config['onErrorNull'])) {
+        } 
+        if (isset($this->config['onErrorNull'])) {
             $this->_nullable = (bool) $this->config['onErrorNull'];
         }
     }
@@ -140,7 +143,9 @@ class GherkinParam extends \Codeception\Module
                 $values = [];
                 $matches = $matches[0]; // override for readability
                 foreach ($matches as $variable) {
-                    $variable = trim(preg_filter(self::$_regEx['filter'], '', $variable));
+                    $variable = trim(
+                        preg_filter(self::$_regEx['filter'], '', $variable)
+                    );
                     // config case
                     if (preg_match(self::$_regEx['config'], $variable)) {
                         $values[] = $this->getValueFromConfig($variable);
@@ -149,10 +154,11 @@ class GherkinParam extends \Codeception\Module
                         // array case
                         try {
                               $values[] = $this->getValueFromArray($variable);
-                        } catch (RuntimeException $e) {
+                        } catch (RuntimeException $exception) {
                             if ($this->_throwException) { 
                                 throw new GherkinParamException();
-                            } elseif ($this->_nullable) { 
+                            } 
+                            if ($this->_nullable) { 
                                 $values[] = null;
                             }
                         }
@@ -161,10 +167,11 @@ class GherkinParam extends \Codeception\Module
                     // normal case
                     try {
                         $values[] = Fixtures::get($variable);
-                    } catch (RuntimeException $e) {
+                    } catch (RuntimeException $exception) {
                         if ($this->_throwException) { 
                             throw new GherkinParamException();
-                        } elseif ($this->_nullable) { 
+                        }
+                        if ($this->_nullable) { 
                             $values[] = null;
                         }
                     }
@@ -177,10 +184,11 @@ class GherkinParam extends \Codeception\Module
                 }
 
                 // array str_replace cannot be used 
-                // due to the default behavior when `search` and `replace` arrays size mismatch
+                // due to the default behavior when `search` 
+                // and `replace` arrays size mismatch
                 $param = $this->mapParametersToValues($matches, $values, $param);
 
-            } catch (GherkinParamException $e) {
+            } catch (GherkinParamException $exception) {
                 // only active if _throwException setting is true
                 throw new ExtensionException(
                     $this, 
@@ -200,22 +208,27 @@ class GherkinParam extends \Codeception\Module
      * @param array  $values  Array of replacement values
      * @param string $param   Parameter name
      *
-     * @return \mixed|null Returns parameter's value if exists, else parameter {{name}}
+     * @return \mixed|null Returns value if exists, else parameter {{name}}
      *
      * @todo pass param ref to function (&) [performance]
      */  
-    final protected function mapParametersToValues(array $matches, array $values, string $param)
-    {
+    final protected function mapParametersToValues(
+        array $matches, 
+        array $values, 
+        string $param
+    ) {
         $len = count($matches);
         for ($i = 0; $i < $len; $i++) {
             $search = $matches[$i];
             if (isset($values[$i])) {
                 $replacement = $values[$i];
                 if (is_array($replacement)) { 
-                    // case of replacement is an array (case of config param), ie param does not exists
+                    // case of replacement is an array (case of config param)
+                    // ie param does not exists
                     if ($this->_throwException) {
                         throw new GherkinParamException();
-                    } elseif ($this->_nullable) {
+                    } 
+                    if ($this->_nullable) {
                         return null;
                     }
                     break;
@@ -293,6 +306,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @codeCoverageIgnore
      * @ignore             Codeception specific
+     * @phpcs:disable PEAR.NamingConventions.ValidFunctionName.PublicUnderscore
      */
     final public function _beforeSuite($settings = [])
     {
@@ -305,6 +319,8 @@ class GherkinParam extends \Codeception\Module
      * @param \Codeception\Step $step Codeception scenario step
      * 
      * @return void
+     * 
+     * @phpcs:disable PEAR.NamingConventions.ValidFunctionName.PublicUnderscore
      */
     final public function _beforeStep(Step $step)
     {
@@ -330,7 +346,8 @@ class GherkinParam extends \Codeception\Module
                 foreach ($table as $i => $row) {
                     foreach ($row as $j => $cell) {
                         $val = $this->getValueFromParam($cell);
-                        $table[$i][$j] = $val ? $val : null; // issue TableNode does not support `null` values in table
+                        // issue TableNode does not support `null` values in table
+                        $table[$i][$j] = $val ? $val : null;
                     }
                 }
                 $prop->setValue($arg, $table);
