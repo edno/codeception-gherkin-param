@@ -10,3 +10,5 @@ composer.lock
 # ignore local configuration files
 *.yml
 !*.dist.yml
+
+.vscode
