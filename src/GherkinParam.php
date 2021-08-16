@@ -133,7 +133,7 @@ class GherkinParam extends \Codeception\Module
             if ($this->throwException) throw new GherkinParamException();
             if ($this->nullable) $values[] = null;
           }
-          // if machting value return is not found (null)
+          // if matching value return is not found (null)
           if (is_null(end($values))) {
             if ($this->throwException) throw new GherkinParamException();
           }
@@ -282,7 +282,7 @@ class GherkinParam extends \Codeception\Module
       } elseif (is_a($arg, '\Behat\Gherkin\Node\TableNode')) {
       // case if arg is a table
       // e.g. I see :
-      //  | paramater |
+      //  | parameter |
       //  | {{param}} |
         $prop = new ReflectionProperty(get_class($arg), 'table');
         $prop->setAccessible(true);
