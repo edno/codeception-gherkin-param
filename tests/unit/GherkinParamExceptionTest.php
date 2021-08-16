@@ -7,7 +7,6 @@ use \Codeception\Util\Fixtures;
 class GherkinParamExceptionTest extends \Codeception\Test\Unit
 {
     use \Codeception\AssertThrows;
-    use \Codeception\Specify;
 
     /**
      * @var \UnitTester
@@ -33,30 +32,22 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
 
     public function testGetValueFromParamWithExceptionFromConfig()
     {
-        $this->specify(
-            'getValueFromConfig', function () {
-                $this->assertThrows(
-                    ExtensionException::class, function () {
-                        $this
-                            ->module
-                            ->getValueFromParam('{{config:undefinedConfig}}');
-                    }
-                );
+        $this->assertThrows(
+            ExtensionException::class, function () {
+                $this
+                    ->module
+                    ->getValueFromParam('{{config:undefinedConfig}}');
             }
         );
     }
 
     public function testGetValueFromParamWithExceptionFromArray()
     {
-        $this->specify(
-            'getValueFromArray', function () {
-                $this->assertThrows(
-                    ExtensionException::class, function () {
-                        $this
-                            ->module
-                            ->getValueFromParam('{{undefinedArray[4]}}');
-                    }
-                );
+        $this->assertThrows(
+            ExtensionException::class, function () {
+                $this
+                    ->module
+                    ->getValueFromParam('{{undefinedArray[4]}}');
             }
         );
     }
