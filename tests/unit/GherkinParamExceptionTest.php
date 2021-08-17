@@ -17,13 +17,13 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
     protected function _before(): void
     {        
         $module = $this->getModule('Codeception\Extension\GherkinParam');
-        $module->_reconfigure(array('onErrorThrowException' => true));
+        $module->_reconfigure(['onErrorThrowException' => true]);
         $this->module = Mockery::mock($module)
             ->shouldAllowMockingProtectedMethods()
             ->makePartial();
 
-        $this->fixture = Mockery::mock(Fixtures::class)
-            ->makePartial();
+        $this->module = Mockery::spy($module)
+            ->shouldAllowMockingProtectedMethods();
     }
 
     protected function _after(): void
