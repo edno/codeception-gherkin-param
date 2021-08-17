@@ -27,6 +27,18 @@ class GherkinParamNullableTest extends \Codeception\Test\Unit
             ->module
             ->mapParametersToValues(
                 [0,1,2,3,4],
+                [[0],[1],[2],[3],[4]],
+                "test"
+            );
+        $this->assertNull($param);
+    }
+
+    public function testMapParametersToValuesWithExceptionOnIsSet()
+    {
+        $param = $this
+            ->module
+            ->mapParametersToValues(
+                [0,1,2,3,4],
                 [],
                 "test"
             );
