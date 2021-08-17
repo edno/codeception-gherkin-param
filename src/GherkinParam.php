@@ -109,7 +109,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @phpcs:disable PEAR.NamingConventions.ValidFunctionName.PublicUnderscore
      */
-    final public function _initialize() 
+    final public function _initialize(): void
     {
         if (isset($this->config['onErrorThrowException'])) {
             $this->_throwException = (bool) $this->config['onErrorThrowException'];
@@ -124,7 +124,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @return void
      */
-    final public function onReconfigure()
+    final public function onReconfigure(): void
     {
         $this->_initialize();
     }
@@ -134,11 +134,11 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param Fixture entry name
      *
-     * @return \mixed|null Returns parameter's value if exists, else parameter's name
+     * @return \mixed Returns parameter's value if exists, else parameter's name
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromParam(string $param)
+    final protected function getValueFromParam(string $param): mixed
     {
         if (preg_match_all(self::$_regEx['match'], $param, $matches)) {
             try {
@@ -194,7 +194,11 @@ class GherkinParam extends \Codeception\Module
                 // only active if _throwException setting is true
                 throw new ExtensionException(
                     $this, 
-                    "Incorrect parameter `${param}` variable `${variable}` not found, or not initialized"
+                    <<<EOT
+                    Incorrect parameter `${param}` 
+                    variable `${variable}` not found, 
+                    or not initialized"
+                    EOT
                 );
             }
     
@@ -210,7 +214,7 @@ class GherkinParam extends \Codeception\Module
      * @param array  $values  Array of replacement values
      * @param string $param   Parameter name
      *
-     * @return \mixed|null Returns value if exists, else parameter {{name}}
+     * @return \mixed Returns value if exists, else parameter {{name}}
      *
      * @todo pass param ref to function (&) [performance]
      */  
@@ -218,7 +222,7 @@ class GherkinParam extends \Codeception\Module
         array $matches, 
         array $values, 
         string $param
-    ) {
+    ): mixed {
         $len = count($matches);
         for ($i = 0; $i < $len; $i++) {
             $search = $matches[$i];
@@ -255,11 +259,11 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param Configuration entry name
      *
-     * @return \mixed|null Returns parameter's value if exists, else null
+     * @return \mixed Returns parameter's value if exists, else null
      *
      * @todo pass param ref to function (&) [performance]
      */
-    final protected function getValueFromConfig(string $param)
+    final protected function getValueFromConfig(string $param): mixed
     {
         $value = null;
         $config = self::$_suiteConfig;
@@ -284,13 +288,13 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param Fixture entry name
      *
-     * @return \mixed|null Returns parameter's value if exists, else null
+     * @return \mixed Returns parameter's value if exists, else null
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @todo pass param ref to function (&) [performance]
      */
-    final protected function getValueFromArray(string $param)
+    final protected function getValueFromArray(string $param): mixed
     {
         $value = null;
  
@@ -314,7 +318,7 @@ class GherkinParam extends \Codeception\Module
      * @ignore             Codeception specific
      * @phpcs:disable PEAR.NamingConventions.ValidFunctionName.PublicUnderscore
      */
-    final public function _beforeSuite($settings = [])
+    final public function _beforeSuite($settings = []): void
     {
         self::$_suiteConfig = $settings;
     }
@@ -328,7 +332,7 @@ class GherkinParam extends \Codeception\Module
      * 
      * @phpcs:disable PEAR.NamingConventions.ValidFunctionName.PublicUnderscore
      */
-    final public function _beforeStep(Step $step)
+    final public function _beforeStep(Step $step): void
     {
         // access to the protected property using reflection
         $refArgs = new ReflectionProperty(get_class($step), 'arguments');
