@@ -138,7 +138,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromParam(string $param): mixed
+    final protected function getValueFromParam(string $param): \mixed
     {
         if (preg_match_all(self::$_regEx['match'], $param, $matches)) {
             try {
@@ -222,7 +222,7 @@ class GherkinParam extends \Codeception\Module
         array $matches, 
         array $values, 
         string $param
-    ): mixed {
+    ): \mixed {
         $len = count($matches);
         for ($i = 0; $i < $len; $i++) {
             $search = $matches[$i];
@@ -263,7 +263,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @todo pass param ref to function (&) [performance]
      */
-    final protected function getValueFromConfig(string $param): mixed
+    final protected function getValueFromConfig(string $param): \mixed
     {
         $value = null;
         $config = self::$_suiteConfig;
@@ -294,7 +294,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @todo pass param ref to function (&) [performance]
      */
-    final protected function getValueFromArray(string $param): mixed
+    final protected function getValueFromArray(string $param): \mixed
     {
         $value = null;
  
