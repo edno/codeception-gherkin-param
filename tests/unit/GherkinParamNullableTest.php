@@ -21,14 +21,8 @@ class GherkinParamNullableTest extends \Codeception\Test\Unit
             ->shouldAllowMockingProtectedMethods();
     }
 
-    protected function _after(): void
-    {
-    }
-
     public function testMapParametersToValuesWithExceptionOnIsArray()
     {
-
-        
         $param = $this
             ->module
             ->mapParametersToValues(
@@ -36,7 +30,6 @@ class GherkinParamNullableTest extends \Codeception\Test\Unit
                 [],
                 "test"
             );
-
         $this->assertNull($param);
     }
 }

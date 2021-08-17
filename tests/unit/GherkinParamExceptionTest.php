@@ -26,10 +26,6 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
             ->shouldAllowMockingProtectedMethods();
     }
 
-    protected function _after(): void
-    {
-    }
-
     public function testGetValueFromParamWithExceptionFromConfig()
     {
         $this->assertThrows(
