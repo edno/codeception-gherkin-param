@@ -1,8 +1,8 @@
 <?php
 
-use \Codeception\Exception\ExtensionException;
-
-use \Codeception\Util\Fixtures;
+use Codeception\Exception\ExtensionException;
+use Codeception\Extension\GherkinParamException;
+use Codeception\Util\Fixtures;
 
 class GherkinParamExceptionTest extends \Codeception\Test\Unit
 {
@@ -17,17 +17,13 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
     protected function _before(): void
     {        
         $module = $this->getModule('Codeception\Extension\GherkinParam');
-        $module->_reconfigure(array('onErrorThrowException' => true));
+        $module->_reconfigure(['onErrorThrowException' => true]);
         $this->module = Mockery::mock($module)
             ->shouldAllowMockingProtectedMethods()
             ->makePartial();
 
-        $this->fixture = Mockery::mock(Fixtures::class)
-            ->makePartial();
-    }
-
-    protected function _after(): void
-    {
+        $this->module = Mockery::spy($module)
+            ->shouldAllowMockingProtectedMethods();
     }
 
     public function testGetValueFromParamWithExceptionFromConfig()
@@ -59,6 +55,36 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
                 $this
                     ->module
                     ->getValueFromParam('{{undefinedValue}}');
+            }
+        );
+    }
+
+    public function testMapParametersToValuesWithExceptionOnIsArray()
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->mapParametersToValues(
+                        [0,1,2,3,4],
+                        [[0],[1],[2],[3],[4]],
+                        "test"
+                    );
+            }
+        );
+    }
+
+    public function testMapParametersToValuesWithExceptionOnIsSet()
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->mapParametersToValues(
+                        [0,1,2,3,4],
+                        [],
+                        "test"
+                    );
             }
         );
     }
