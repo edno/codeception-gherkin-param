@@ -277,7 +277,7 @@ class GherkinParam extends \Codeception\Module
                     continue;
                 } 
                     return $value;
-                
+
             }
         }
         return $value;
