@@ -1,8 +1,8 @@
 <?php
 
-use \Codeception\Exception\ExtensionException;
-
-use \Codeception\Util\Fixtures;
+use Codeception\Exception\ExtensionException;
+use Codeception\Extension\GherkinParamException;
+use Codeception\Util\Fixtures;
 
 class GherkinParamExceptionTest extends \Codeception\Test\Unit
 {
@@ -59,6 +59,36 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
                 $this
                     ->module
                     ->getValueFromParam('{{undefinedValue}}');
+            }
+        );
+    }
+
+    public function testMapParametersToValuesWithExceptionOnIsArray()
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->mapParametersToValues(
+                        [0,1,2,3,4],
+                        [[0],[1],[2],[3],[4]],
+                        "test"
+                    );
+            }
+        );
+    }
+
+    public function testMapParametersToValuesWithExceptionOnIsSet()
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->mapParametersToValues(
+                        [0,1,2,3,4],
+                        [],
+                        "test"
+                    );
             }
         );
     }
