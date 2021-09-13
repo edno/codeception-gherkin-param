@@ -6,6 +6,8 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    env:
+      XDEBUG_MODE: coverage
 
     steps:
     - uses: actions/checkout@v1
@@ -14,17 +16,14 @@ jobs:
       run: composer validate
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: composer update --prefer-stable --no-progress --no-interaction --quiet
 
     - name: Run test suite
-      run: ./vendor/bin/codecept run -q --no-colors --coverage-xml
-      env:
-        XDEBUG_MODE: coverage
+      run: ./vendor/bin/codecept run --quiet --no-colors --no-interaction --coverage --coverage-xml
 
     - name: Run mutation tests
-      run: ./vendor/bin/infection --min-covered-msi=70 --threads=4 --no-progress --log-verbosity="none"
+      run: ./vendor/bin/infection --min-covered-msi=80 --threads=2 --no-progress --no-interaction --log-verbosity=none
       env:
-        XDEBUG_MODE: coverage
         STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
 
     - name: Run Coveralls reporting

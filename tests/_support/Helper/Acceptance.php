@@ -4,6 +4,11 @@ namespace Helper;
 use Behat\Gherkin\Node\TableNode;
 use Codeception\Util\Fixtures;
 
+/**
+ * Helper for acceptance tests
+ *
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
 class Acceptance extends \Codeception\Module
 {
     /**
@@ -12,7 +17,7 @@ class Acceptance extends \Codeception\Module
     public function iHaveParams(TableNode $table)
     {
         foreach ($table->getRows() as $idx => $row) {
-            if ($idx == 0) { 
+            if ($idx == 0) {
                 continue;
             }
             Fixtures::add($row[0], $row[1]);

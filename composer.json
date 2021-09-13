@@ -16,14 +16,15 @@
     "composer-runtime-api": "^2.0"
   },
   "require-dev": {
-    "php-coveralls/php-coveralls": "^2",
+    "brainmaestro/composer-git-hooks": "^2.8",
+    "codeception/assert-throws": "^1.1",
     "codeception/module-asserts": "^1",
+    "codeception/mockery-module": "^0.4",
+    "infection/codeception-adapter": "^0.3",
     "infection/infection": "^0.24",
-    "infection/codeception-adapter": "^0.3.4",
+    "php-coveralls/php-coveralls": "^2",
     "phpmd/phpmd" : "@stable",
-    "squizlabs/php_codesniffer": "3.*",
-    "codeception/mockery-module": "^0.4.0",
-    "codeception/assert-throws": "^1.1"
+    "squizlabs/php_codesniffer": "3.*"
   },
   "autoload": {
     "psr-4": {
@@ -31,5 +32,10 @@
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "extra": {
+    "hooks": {
+      "pre-push": "earthly +all"
+    }
+  }
 }

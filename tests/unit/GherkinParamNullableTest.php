@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Tests for onErrorNull configuration parameter
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
 class GherkinParamNullableTest extends \Codeception\Test\Unit
 {
 
@@ -7,13 +11,13 @@ class GherkinParamNullableTest extends \Codeception\Test\Unit
      * @var \UnitTester
      */
     protected $module;
-    
+
     protected function _before(): void
-    {        
+    {
         $module = $this->getModule('Codeception\Extension\GherkinParam');
         $module->_reconfigure(
             [
-            'onErrorThrowException' => false, 
+            'onErrorThrowException' => false,
             'onErrorNull' => true
             ]
         );

@@ -14,8 +14,7 @@ jobs:
     - php: nightly
 
 before_script:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "8.0" ]]; then composer remove --no-interaction --dev infection/infection infection/codeception-adapter infection/extension-installer; fi
-  - composer install --no-interaction
+  - composer update --prefer-stable --no-progress --no-interaction --quiet
 
 script:
-  - "./vendor/bin/codecept run --no-colors"
+  - "./vendor/bin/codecept run --quiet --no-interaction --no-colors"

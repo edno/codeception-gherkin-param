@@ -19,5 +19,5 @@
     "@function_signature": false
   },
   "testFramework": "codeception",
-  "testFrameworkOptions": "acceptance" 
+  "testFrameworkOptions": "acceptance"
 }
