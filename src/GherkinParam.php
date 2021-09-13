@@ -312,6 +312,8 @@ class GherkinParam extends \Codeception\Module
      *
      * @return \mixed Returns parameter's value if exists, else null
      *
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @todo pass param ref to function (&) [performance]
      */
     final protected function getValueFromFixture(string $param)
