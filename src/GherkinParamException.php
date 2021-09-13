@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @category Test
  * @package  GherkinParam
  * @author   Gregory Heitz <edno@edno.io>
- * @license  https://github.com/edno/codeception-gherkin-param/blob/main/LICENSE Apache Licence
+ * @license  https://git.io/Juy0k Apache Licence
  * @link     https://packagist.org/packages/edno/codeception-gherkin-param
  */
 
@@ -22,7 +22,7 @@ namespace Codeception\Extension;
  * @category Test
  * @package  GherkinParam
  * @author   Gregory Heitz <edno@edno.io>
- * @license  https://github.com/edno/codeception-gherkin-param/blob/main/LICENSE Apache Licence
+ * @license  https://git.io/Juy0k Apache Licence
  * @link     https://packagist.org/packages/edno/codeception-gherkin-param
  *
  * @SuppressWarnings(PHPMD.CamelCaseMethodName)

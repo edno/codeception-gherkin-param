@@ -4,6 +4,11 @@ use Codeception\Exception\ExtensionException;
 use Codeception\Extension\GherkinParamException;
 use Codeception\Util\Fixtures;
 
+/**
+ * Tests for onErrorThrowException configuration parameter
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
 class GherkinParamExceptionTest extends \Codeception\Test\Unit
 {
     use \Codeception\AssertThrows;
@@ -13,9 +18,9 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
      */
     protected $module;
     protected $fixture;
-    
+
     protected function _before(): void
-    {        
+    {
         $module = $this->getModule('Codeception\Extension\GherkinParam');
         $module->_reconfigure(['onErrorThrowException' => true]);
         $this->module = Mockery::mock($module)
