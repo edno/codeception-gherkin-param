@@ -432,6 +432,4 @@ class GherkinParam extends \Codeception\Module
             }
         }
         // set new arguments value
-        $refArgs->setValue($step, $args);
-    }
-}
+        $refArgs->setValue($step, $args
