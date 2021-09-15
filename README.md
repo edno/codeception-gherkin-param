@@ -137,6 +137,12 @@ The steps definition in `AcceptanceTester.php` do not require any change
 
  You can find more examples in the [test folder](https://github.com/edno/codeception-gherkin-param/tree/main/tests/acceptance).
 
-## License
+## Contributions
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param?ref=badge_large)
+Contributions, issues and feature requests are very welcome. If you are using this package and fixed a bug for yourself, please consider submitting a PR!
+
+<a href="https://github.com/edno/codeception-gherkin-param/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=edno/codeception-gherkin-param" />
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
