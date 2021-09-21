@@ -23,10 +23,11 @@ declare(strict_types=1);
  */
 namespace Codeception\Extension;
 
-use \Codeception\Util\Fixtures;
-use \Behat\Gherkin\Node\TableNode;
 use \ReflectionProperty;
 use \RuntimeException;
+use \TypeError;
+use \Behat\Gherkin\Node\TableNode;
+use \Codeception\Util\Fixtures;
 use \Codeception\Exception\ExtensionException;
 use \Codeception\Configuration;
 use \Codeception\Step;
