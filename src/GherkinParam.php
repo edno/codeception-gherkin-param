@@ -262,7 +262,7 @@ class GherkinParam extends \Codeception\Module
         string $param
     ) {
         $value = null;
-        $config = self::$_suiteConfig;
+        $suiteConfig = self::$_suiteConfig;
 
         preg_match_all(
             self::$_regEx['config'],
@@ -271,10 +271,10 @@ class GherkinParam extends \Codeception\Module
         );
 
         foreach ($args[1] as $arg) {
-            if (array_key_exists($arg, $config)) {
-                $value = $config[$arg];
+            if (array_key_exists($arg, $suiteConfig)) {
+                $value = $suiteConfig[$arg];
                 if (is_array($value)) {
-                    $config = $value;
+                    $suiteConfig = $value;
                     continue;
                 }
                     return $value;
