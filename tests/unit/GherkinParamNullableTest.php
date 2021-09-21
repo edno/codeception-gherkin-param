@@ -14,14 +14,16 @@ class GherkinParamNullableTest extends \Codeception\Test\Unit
 
     protected function _before(): void
     {
-        $module = $this->getModule('Codeception\Extension\GherkinParam');
-        $module->_reconfigure(
+        $moduleInstance = $this->getModule(
+            'Codeception\Extension\GherkinParam'
+        );
+        $moduleInstance->_reconfigure(
             [
             'onErrorThrowException' => false,
             'onErrorNull' => true
             ]
         );
-        $this->module = Mockery::spy($module)
+        $this->module = Mockery::spy($moduleInstance)
             ->shouldAllowMockingProtectedMethods();
     }
 
