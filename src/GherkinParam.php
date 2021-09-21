@@ -220,32 +220,22 @@ class GherkinParam extends \Codeception\Module
     ) {
         $len = count($matches);
         for ($i = 0; $i < $len; $i++) {
-            $search = $matches[$i];
-            if (isset($values[$i])) {
-                $replacement = $values[$i];
-                if (is_array($replacement)) {
-                    // case of replacement is an array (case of config param)
-                    // ie param does not exists
-                    if ($this->_throwException) {
-                        throw new GherkinParamException();
-                    }
-                    if ($this->_nullable) {
-                        $param = null;
-                    }
-                    break;
+            if (isset($values[$i]) === false || is_array($values[$i])) {
+                // case of replacement is an array (case of config param)
+                // ie param does not exists
+                if ($this->_throwException) {
+                    throw new GherkinParamException();
                 }
-                //TODO: replace str_replace by strtr (performance)
-                $param = str_replace($search, strval($replacement), $param);
-                continue;
+                if ($this->_nullable) {
+                    $param = null;
+                }
+                break;
             }
 
-            if ($this->_throwException) {
-                throw new GherkinParamException();
-            }
-            if ($this->_nullable) {
-                $param = null;
-            }
+            //TODO: replace str_replace by strtr (performance)
+            $param = str_replace($matches[$i], strval($values[$i]), $param);
         }
+
         return $param;
     }
 
@@ -273,11 +263,10 @@ class GherkinParam extends \Codeception\Module
         foreach ($args[1] as $arg) {
             if (array_key_exists($arg, $suiteConfig)) {
                 $value = $suiteConfig[$arg];
-                if (is_array($value)) {
-                    $suiteConfig = $value;
-                    continue;
-                }
+                if (is_array($value) === false) {
                     return $value;
+                }
+                $suiteConfig = $value;
             }
         }
         return $value;
@@ -414,22 +403,25 @@ class GherkinParam extends \Codeception\Module
         // retrieve 'arguments' value
         $args = $refArgs->getValue($step);
         foreach ($args as $index => $arg) {
-            if (is_string($arg)) {
-                // case if arg is a string
+            switch (true) {
+            case is_string($arg):
                 // e.g. I see "{{param}}"
                 $args[$index] = $this->getValueFromParam($arg);
-            } elseif (is_a($arg, '\Behat\Gherkin\Node\TableNode')) {
-                // case if arg is a table
+                break;
+            case is_a($arg, '\Behat\Gherkin\Node\TableNode'):
                 // e.g. I see :
                 //  | parameter |
                 //  | {{param}} |
                 $args[$index] = $this->parseTableNode($arg);
-            } elseif (is_array($arg)) {
+                break;
+            case is_array($arg):
+                // e.g. I see "{{param[0]}}"
                 foreach ($arg as $k => $v) {
                     if (is_string($v)) {
                         $args[$index][$k] = $this->getValueFromParam($v);
                     }
                 }
+                break;
             }
         }
         // set new arguments value
