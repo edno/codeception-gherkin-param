@@ -21,7 +21,9 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
 
     protected function _before(): void
     {
-        $moduleInstance = $this->getModule('Codeception\Extension\GherkinParam');
+        $moduleInstance = $this->getModule(
+            'Codeception\Extension\GherkinParam'
+        );
         $moduleInstance->_reconfigure(['onErrorThrowException' => true]);
         $this->module = Mockery::mock($moduleInstance)
             ->shouldAllowMockingProtectedMethods()
