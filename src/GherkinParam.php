@@ -422,6 +422,8 @@ class GherkinParam extends \Codeception\Module
                     }
                 }
                 break;
+            default:
+                // do nothing
             }
         }
         // set new arguments value
