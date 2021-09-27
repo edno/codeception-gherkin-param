@@ -2,7 +2,7 @@
 
 [![Packagist](https://img.shields.io/packagist/dt/edno/codeception-gherkin-param.svg?style=flat-square)](https://packagist.org/packages/edno/codeception-gherkin-param)
 [![Latest Version](https://img.shields.io/packagist/v/edno/codeception-gherkin-param.svg?style=flat-square)](https://packagist.org/packages/edno/codeception-gherkin-param)
-[![Build Status](https://img.shields.io/travis/com/edno/codeception-gherkin-param.svg?style=flat-square)](https://travis-ci.com/edno/codeception-gherkin-param)
+[![Build Status](https://img.shields.io/travis/com/edno/codeception-gherkin-param.svg?style=flat-square)](https://app.travis-ci.com/github/edno/codeception-gherkin-param)
 [![Coverage Status](https://img.shields.io/coveralls/edno/codeception-gherkin-param.svg?style=flat-square)](https://coveralls.io/github/edno/codeception-gherkin-param?branch=main)
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fedno%2Fcodeception-gherkin-param%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/edno/codeception-gherkin-param/main)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/main/LICENSE)
