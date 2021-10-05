@@ -33,7 +33,7 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
             ->shouldAllowMockingProtectedMethods();
     }
 
-    public function testGetValueFromParamWithExceptionFromConfig()
+    public function testGetValueFromParamWithExceptionFromConfig(): void
     {
         $this->assertThrows(
             ExtensionException::class, function () {
@@ -44,7 +44,7 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
         );
     }
 
-    public function testGetValueFromParamWithExceptionFromArray()
+    public function testGetValueFromParamWithExceptionFromArray(): void
     {
         $this->assertThrows(
             ExtensionException::class, function () {
@@ -55,7 +55,7 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
         );
     }
 
-    public function testGetValueFromParamWithExceptionFromFixture()
+    public function testGetValueFromParamWithExceptionFromFixture(): void
     {
         $this->assertThrows(
             ExtensionException::class, function () {
@@ -66,7 +66,7 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
         );
     }
 
-    public function testMapParametersToValuesWithExceptionOnIsArray()
+    public function testMapParametersToValuesWithExceptionOnIsArray(): void
     {
         $this->assertThrows(
             GherkinParamException::class, function () {
@@ -81,7 +81,7 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
         );
     }
 
-    public function testMapParametersToValuesWithExceptionOnIsSet()
+    public function testMapParametersToValuesWithExceptionOnIsSet(): void
     {
         $this->assertThrows(
             GherkinParamException::class, function () {

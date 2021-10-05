@@ -68,14 +68,17 @@ class GherkinParam extends \Codeception\Module
      */
     private $_nullable = false;
 
+    /**
+     * Array of configuration parameters
+     *
+     * @var array<string>
+     */
     protected $config = ['onErrorThrowException', 'onErrorNull'];
-
-    protected $requiredFields = [];
 
     /**
      * List events to listen to
      *
-     * @var array
+     * @var array<string,string>
      */
     public static $events = [
     //run before any suite
@@ -87,14 +90,14 @@ class GherkinParam extends \Codeception\Module
     /**
      * Current test suite config
      *
-     * @var array
+     * @var array<mixed>
      */
     private static $_suiteConfig;
 
     /**
      * RegExp for parsing steps
      *
-     * @var array
+     * @var array<string,string>
      */
     private static $_regEx = [
     'match'  => '/{{\s?[A-z0-9_:-<>]+\s?}}/',
@@ -137,12 +140,14 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param Fixture entry name
      *
-     * @return \mixed Returns parameter's value if exists, else parameter's name
+     * @return mixed Returns parameter's value if exists, else parameter's name
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
     final protected function getValueFromParam(string $param)
     {
+        $variable = null;
+
         $hasParam = (bool) preg_match_all(
             self::$_regEx['match'],
             $param,
@@ -156,9 +161,15 @@ class GherkinParam extends \Codeception\Module
         try {
             $values = [];
             $matches = $matches[0]; // override for readability
-            foreach ($matches as $variable) {
+            foreach ($matches as $match) {
                 $variable = trim(
-                    preg_filter(self::$_regEx['filter'], '', $variable)
+                    strval(
+                        preg_filter(
+                            self::$_regEx['filter'],
+                            '',
+                            "${match}"
+                        )
+                    )
                 );
 
                 // config case
@@ -205,11 +216,11 @@ class GherkinParam extends \Codeception\Module
     /**
      * Replace parameters' matches by corresponding values
      *
-     * @param array  $matches Array of matches
-     * @param array  $values  Array of replacement values
-     * @param string $param   Parameter name
+     * @param array<mixed> $matches Array of matches
+     * @param array<mixed> $values  Array of replacement values
+     * @param string       $param   Parameter name
      *
-     * @return \mixed Returns value if exists, else parameter {{name}}
+     * @return mixed Returns value if exists, else parameter {{name}}
      *
      * @todo pass param ref to function (&) [performance]
      */
@@ -244,7 +255,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param Configuration entry name
      *
-     * @return \mixed Returns parameter's value if exists, else null
+     * @return mixed Returns parameter's value if exists, else null
      *
      * @todo pass param ref to function (&) [performance]
      */
@@ -277,11 +288,11 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param fixture array notation
      *
-     * @return \mixed Returns parameter's value if exists, else null
+     * @return mixed Returns parameter's value if exists, else null
      *
      * @todo pass param ref to function (&) [performance]
      */
-    final protected function getValueFromArrayParam($param)
+    final protected function getValueFromArrayParam(string $param)
     {
         try {
             return $this->getValueFromArray($param);
@@ -300,7 +311,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param fixture variable name
      *
-     * @return \mixed Returns parameter's value if exists, else null
+     * @return mixed Returns parameter's value if exists, else null
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
@@ -325,7 +336,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @param string $param Fixture entry name
      *
-     * @return \mixed Returns parameter's value if exists, else null
+     * @return mixed Returns parameter's value if exists, else null
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
@@ -347,9 +358,9 @@ class GherkinParam extends \Codeception\Module
     /**
      * Parse a table node by mapping its parameters
      *
-     * @param \Behat\Gherkin\Node\TableNode $tablenode table node
+     * @param \Behat\Gherkin\Node\TableNode<mixed> $tablenode table node
      *
-     * @return \Behat\Gherkin\Node\TableNode Returns valued table node
+     * @return \Behat\Gherkin\Node\TableNode<mixed> Returns valued table node
      */
     final protected function parseTableNode(TableNode $tablenode)
     {
@@ -360,7 +371,7 @@ class GherkinParam extends \Codeception\Module
             foreach ($row as $j => $cell) {
                 $val = $this->getValueFromParam($cell);
                 // issue TableNode does not support `null` values in table
-                $table[$i][$j] = $val ? $val : null;
+                $table[$i][$j] = $val;
             }
         }
         $prop->setValue($tablenode, $table);
@@ -372,7 +383,7 @@ class GherkinParam extends \Codeception\Module
     /**
      * Capture suite's config before any execution
      *
-     * @param array $settings Codeception test suite settings
+     * @param array<mixed> $settings Codeception test suite settings
      *
      * @return void
      *

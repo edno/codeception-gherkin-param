@@ -25,15 +25,17 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @Given I have a parameter :param with value :value
      */
-    public function iHaveAParameterWithValue(string $param, string $value)
-    {
+    public function iHaveAParameterWithValue(
+        string $param,
+        string $value
+    ): void {
         Fixtures::add($param, $value);
     }
 
     /**
      * @Then /^I should see "([^"]+)" equals (?:to )?(?:")?([^"]+)(?:")?$/i
      */
-    public function iSeeEqual(string $arg1, string $arg2)
+    public function iSeeEqual(string $arg1, string $arg2): void
     {
         $this->assertEquals($arg2, $arg1);
     }
@@ -41,10 +43,10 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @Then I should see following:
      */
-    public function iSeeTableEqual(TableNode $table)
+    public function iSeeTableEqual(TableNode $table): void
     {
         foreach ($table->getRows() as $idx => $row) {
-            if ($idx == 0) { 
+            if ($idx == 0) {
                 continue;
             }
             $this->assertEquals($row[1], $row[0]);
@@ -54,7 +56,7 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @Then /^I should see "(.+)" is null$/i
      */
-    public function iSeeNull(string $arg1)
+    public function iSeeNull(string $arg1): void
     {
         $this->assertNull($arg1);
     }
@@ -65,8 +67,10 @@ class AcceptanceTester extends \Codeception\Actor
      * @param string    $param
      * @param TableNode $values
      */
-    public function iHaveParameterWithValues(string $param, TableNode $values)
-    {
+    public function iHaveParameterWithValues(
+        string $param,
+        TableNode $values
+    ): void {
         Fixtures::add($param, $values->getHash());
     }
 
@@ -76,8 +80,10 @@ class AcceptanceTester extends \Codeception\Actor
      * @param string    $param
      * @param TableNode $table
      */
-    public function iSeeParamEquals(string $param, TableNode $table)
-    {
+    public function iSeeParamEquals(
+        string $param,
+        TableNode $table
+    ): void {
         $hash = $table->getHash();
         foreach (Fixtures::get($param) as $key => $values) {
             $this->assertEquals($hash[$key], $values);
@@ -87,7 +93,7 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @Given I do not have a parameter :param
      */
-    public function iDoNotHaveAParameterWithValue(string $param)
+    public function iDoNotHaveAParameterWithValue(string $param): void
     {
         // do nothing with $param
     }
@@ -95,10 +101,10 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @Then I should see null:
      */
-    public function iSeeTableNull(TableNode $table)
+    public function iSeeTableNull(TableNode $table): void
     {
         foreach ($table->getRows() as $idx => $row) {
-            if ($idx == 0) { 
+            if ($idx == 0) {
                 continue;
             }
             $this->assertNull($row[0]);
@@ -108,8 +114,10 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @Given The configuration parameter :param is set to :value
      */
-    public function theConfigurationParameterIsSetTo(string $param, bool $value)
-    {
+    public function theConfigurationParameterIsSetTo(
+        string $param,
+        bool $value
+    ): void {
         $this->setConfigParam($param, $value);
     }
 

@@ -14,7 +14,7 @@ class Acceptance extends \Codeception\Module
     /**
      * @When /I have parameters/
      */
-    public function iHaveParams(TableNode $table)
+    public function iHaveParams(TableNode $table): void
     {
         foreach ($table->getRows() as $idx => $row) {
             if ($idx == 0) {
@@ -27,7 +27,7 @@ class Acceptance extends \Codeception\Module
     /**
      * @When /^I have an array "(\w+)" with values \[(.+)]$/i
      */
-    public function iHaveArray(string $var, string $values)
+    public function iHaveArray(string $var, string $values): void
     {
         $array = preg_split('/,\s?/', $values);
         Fixtures::add($var, $array);
@@ -36,7 +36,7 @@ class Acceptance extends \Codeception\Module
     /**
      * @When /^I do not have an array "(\w+)"/i
      */
-    public function iDoNotHaveArray(string $var)
+    public function iDoNotHaveArray(string $var): void
     {
         // Do nothing with $var
     }
