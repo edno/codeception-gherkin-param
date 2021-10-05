@@ -1,0 +1,10 @@
+includes:
+  - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+
+parameters:
+  level: 8
+  excludePaths:
+    - tests/*/_generated/*
+    - tests/*/_output/*
