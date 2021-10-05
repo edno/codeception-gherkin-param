@@ -193,7 +193,7 @@ class GherkinParam extends \Codeception\Module
                 }
             }
 
-            // array str_replace cannot be used
+            // array str_replace or strtr cannot be used
             // due to the default behavior when `search`
             // and `replace` arrays size mismatch
             $param = $this->mapParametersToValues($matches, $values, $param);
@@ -221,8 +221,6 @@ class GherkinParam extends \Codeception\Module
      * @param string       $param   Parameter name
      *
      * @return mixed Returns value if exists, else parameter {{name}}
-     *
-     * @todo pass param ref to function (&) [performance]
      */
     final protected function mapParametersToValues(
         array $matches,
@@ -243,7 +241,6 @@ class GherkinParam extends \Codeception\Module
                 break;
             }
 
-            //TODO: replace str_replace by strtr (performance)
             $param = str_replace($matches[$i], strval($values[$i]), $param);
         }
 
@@ -256,8 +253,6 @@ class GherkinParam extends \Codeception\Module
      * @param string $param Configuration entry name
      *
      * @return mixed Returns parameter's value if exists, else null
-     *
-     * @todo pass param ref to function (&) [performance]
      */
     final protected function getValueFromConfigParam(
         string $param
@@ -289,8 +284,6 @@ class GherkinParam extends \Codeception\Module
      * @param string $param fixture array notation
      *
      * @return mixed Returns parameter's value if exists, else null
-     *
-     * @todo pass param ref to function (&) [performance]
      */
     final protected function getValueFromArrayParam(string $param)
     {
@@ -314,8 +307,6 @@ class GherkinParam extends \Codeception\Module
      * @return mixed Returns parameter's value if exists, else null
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
-     *
-     * @todo pass param ref to function (&) [performance]
      */
     final protected function getValueFromFixture(string $param)
     {
@@ -339,8 +330,6 @@ class GherkinParam extends \Codeception\Module
      * @return mixed Returns parameter's value if exists, else null
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
-     *
-     * @todo pass param ref to function (&) [performance]
      */
     final protected function getValueFromArray(string $param)
     {
