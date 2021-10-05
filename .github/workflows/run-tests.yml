@@ -18,6 +18,9 @@ jobs:
     - name: Install dependencies
       run: composer update --prefer-stable --no-progress --no-interaction --quiet
 
+    - name: Run static analysis
+      run: ./vendor/bin/phpstan analyse src
+
     - name: Run test suite
       run: ./vendor/bin/codecept run --quiet --no-colors --no-interaction --coverage --coverage-xml
 

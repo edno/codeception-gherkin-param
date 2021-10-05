@@ -6,7 +6,7 @@ class ExtHelper extends \Codeception\Module
     /**
      * @When /I have a configuration file(?:.*)/
      */
-    public function iHaveConfigDoNothing()
+    public function iHaveConfigDoNothing(): void
     {
         // do nothing
     }
@@ -14,7 +14,7 @@ class ExtHelper extends \Codeception\Module
     /**
      * @When /I execute a scenario(?:.*)/
      */
-    public function iExecuteScenarioDoNothing()
+    public function iExecuteScenarioDoNothing(): void
     {
         // do nothing
     }
