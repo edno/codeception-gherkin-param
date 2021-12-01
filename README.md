@@ -8,6 +8,12 @@
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/main/LICENSE)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedno%2Fcodeception-gherkin-param)
 
+---
+
+:mega:<strong>&nbsp;&nbsp;<a href="https://2mjv.short.gy/h5jOWn">This extension is looking for a new maintainer, click here.</a>&nbsp;&nbsp;</strong>:mega:
+
+---
+
 The [Codeception](http://codeception.com/) module for supporting parameter notation
 in [Gherkin](https://codeception.com/docs/07-BDD)
 scenario.
