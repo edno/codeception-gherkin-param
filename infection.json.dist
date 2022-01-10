@@ -10,8 +10,8 @@
     "text": "tests/_output/infection/infection.log",
     "summary": "tests/_output/infection/summary.log",
     "perMutator": "tests/_output/infection/per-mutator.md",
-    "badge": {
-      "branch": "main"
+    "stryker": {
+      "report": "main"
     }
   },
   "tmpDir": "tests/_output/tmp",
