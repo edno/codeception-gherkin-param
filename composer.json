@@ -21,7 +21,7 @@
     "codeception/module-asserts": "^1",
     "codeception/mockery-module": "^0.4",
     "infection/codeception-adapter": "^0.3",
-    "infection/infection": "^0.24",
+    "infection/infection": "^0.26",
     "php-coveralls/php-coveralls": "^2",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-deprecation-rules": "^0.12",
