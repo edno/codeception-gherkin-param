@@ -16,7 +16,7 @@ jobs:
       run: composer validate
 
     - name: Install dependencies
-      run: composer update --prefer-stable --no-progress --no-interaction --quiet
+      run: composer update --prefer-stable --no-progress --no-interaction
 
     - name: Run static analysis
       run: ./vendor/bin/phpstan analyse src
