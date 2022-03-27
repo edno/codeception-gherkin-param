@@ -20,7 +20,7 @@ scenario.
 
 ## Minimum Requirements
 
-- Codeception 3.x, 4.x
+- Codeception 3.x, 4.x, 5.x
 - PHP 7.4 - 8.1 (use release 2.0.6 for older PHP versions)
 
 ## Installation
@@ -80,20 +80,20 @@ modules:
 ## Usage
 
 Once installed you will be able to access variables stored using
-[Fixtures](https://codeception.com/docs/reference/Fixtures.html).  
+[Fixtures](https://codeception.com/docs/reference/Fixtures.html).
 
 ### Simple parameters
 
-In scenario steps, the variables can be accessed using the syntax `{{param}}`.  
+In scenario steps, the variables can be accessed using the syntax `{{param}}`.
 While executing your features the variables will be automatically replaced by their value.
 
 ### Array parameters
 
-You can refer to an element in an array using the syntax `{{param[key]}}`.  
+You can refer to an element in an array using the syntax `{{param[key]}}`.
 
 ### Test Suite Config parameters
 
-You can refer to a test suite configuration parameter using the syntax `{{config:param}}`.  
+You can refer to a test suite configuration parameter using the syntax `{{config:param}}`.
 Note that the keyword **config:** is mandatory.
 
 ## Example
