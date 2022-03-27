@@ -6,6 +6,7 @@ paths:
     data: tests/_data
     support: tests/_support
     envs: tests/_envs
+    output: tests/_output
 
 settings:
     colors: true

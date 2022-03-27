@@ -31,7 +31,9 @@ use \Codeception\Util\Fixtures;
 use \Codeception\Exception\ExtensionException;
 use \Codeception\Configuration;
 use \Codeception\Step;
+use \Codeception\Lib\ModuleContainer;
 use \Codeception\Extension\GherkinParamException;
+use \Codeception\Extension\GherkinParamAttributesTrait;
 
 /**
  * GherkinParam extension main class
@@ -39,15 +41,17 @@ use \Codeception\Extension\GherkinParamException;
  * @category Test
  * @package  GherkinParam
  * @author   Gregory Heitz <edno@edno.io>
- * @license  https://git.io/Juy0k Apache Licence
+ * @license  https://git.io/Juy0k Apache License
  * @link     https://packagist.org/packages/edno/codeception-gherkin-param
  *
  * @SuppressWarnings(PHPMD.CamelCaseMethodName)
  * @SuppressWarnings(PHPMD.CamelCaseVariableName)
  * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
+
 class GherkinParam extends \Codeception\Module
 {
+    use GherkinParamAttributesTrait;
 
     /**
      * Flag to enable exception (prioritized over $_nullable=true)
@@ -57,7 +61,7 @@ class GherkinParam extends \Codeception\Module
      *        instead replacement value is parameter {{name}}
      * true: exception thrown if parameter invalid
      */
-    private $_throwException = false;
+    private bool $_throwException = false;
 
     /**
      * Flag to null invalid parameter (incompatible with $_throwException=true)
@@ -66,45 +70,25 @@ class GherkinParam extends \Codeception\Module
      * true: if parameter invalid then replacement value will be null
      * false: default behaviour, ie replacement value is parameter {{name}}
      */
-    private $_nullable = false;
-
-    /**
-     * Array of configuration parameters
-     *
-     * @var array<string>
-     */
-    protected $config = ['onErrorThrowException', 'onErrorNull'];
-
-    /**
-     * List events to listen to
-     *
-     * @var array<string,string>
-     */
-    public static $events = [
-    //run before any suite
-    'suite.before' => 'beforeSuite',
-    //run before any steps
-    'step.before' => 'beforeStep'
-    ];
-
-    /**
-     * Current test suite config
-     *
-     * @var array<mixed>
-     */
-    private static $_suiteConfig;
+    private bool $_nullable = false;
 
     /**
      * RegExp for parsing steps
      *
      * @var array<string,string>
      */
-    private static $_regEx = [
+    private static array $_regEx = [
     'match'  => '/{{\s?[A-z0-9_:-<>]+\s?}}/',
     'filter' => '/[{}]/',
     'config' => '/(?:^config)?:([A-z0-9_-]+)+(?=:|$)/',
     'array'  => '/^(?P<var>[A-z0-9_-]+)(?:\[(?P<key>.+)])$/'
     ];
+
+    public function __construct(ModuleContainer $moduleContainer, $config = null)
+    {
+        parent::__construct( $moduleContainer, $config);
+        $this->config = $this->_config;
+    }
 
     /**
      * Initialize module configuration

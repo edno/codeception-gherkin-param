@@ -1,10 +1,11 @@
-ARG version=7.4
+ARG version=8.1
 ARG vendor=./vendor/bin
 FROM php:$version-alpine
 WORKDIR /codeception
 ENV XDEBUG_MODE=coverage
 
 deps:
+  RUN apk add git
   RUN apk add --quiet --no-progress --no-cache $PHPIZE_DEPS
   RUN pecl -q install xdebug
   RUN docker-php-ext-enable xdebug
@@ -17,8 +18,7 @@ setup:
   RUN composer update \
     --prefer-stable \
     --no-progress \
-    --no-interaction \
-    --quiet
+    --no-interaction
 
 test:
   FROM +setup
