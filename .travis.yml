@@ -5,6 +5,7 @@ branches:
     - main
 
 php:
+  - 7.4
   - 8.0
   - 8.1
   - nightly
@@ -12,6 +13,7 @@ php:
 jobs:
   allow_failures:
     - php: nightly
+    - php: 7.4
 
 before_script:
   - composer update --prefer-stable --no-progress --no-interaction --quiet
