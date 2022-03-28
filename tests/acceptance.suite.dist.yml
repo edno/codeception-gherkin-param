@@ -2,7 +2,7 @@
 #
 # Suite for acceptance tests.
 
-class_name: AcceptanceTester
+actor: AcceptanceTester
 
 modules:
   enabled:

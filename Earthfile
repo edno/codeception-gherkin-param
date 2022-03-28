@@ -1,13 +1,15 @@
-ARG version=7.4
+ARG version=8.0
 ARG vendor=./vendor/bin
 FROM php:$version-alpine
 WORKDIR /codeception
 ENV XDEBUG_MODE=coverage
 
 deps:
+  RUN apk add git libzip-dev zip
   RUN apk add --quiet --no-progress --no-cache $PHPIZE_DEPS
   RUN pecl -q install xdebug
   RUN docker-php-ext-enable xdebug
+  RUN docker-php-ext-install zip
   RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/bin --filename=composer
 
@@ -17,15 +19,15 @@ setup:
   RUN composer update \
     --prefer-stable \
     --no-progress \
-    --no-interaction \
-    --quiet
+    --no-interaction
 
 test:
   FROM +setup
   RUN $vendor/codecept run \
     --no-interaction \
     --coverage \
-    --coverage-xml
+    --coverage-xml \
+    -v
   SAVE ARTIFACT tests/_output AS LOCAL ./tests/_output
 
 mutation:
