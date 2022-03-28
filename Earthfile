@@ -1,4 +1,4 @@
-ARG version=7.4
+ARG version=8.0
 ARG vendor=./vendor/bin
 FROM php:$version-alpine
 WORKDIR /codeception
@@ -26,7 +26,8 @@ test:
   RUN $vendor/codecept run \
     --no-interaction \
     --coverage \
-    --coverage-xml
+    --coverage-xml \
+    -v
   SAVE ARTIFACT tests/_output AS LOCAL ./tests/_output
 
 mutation:

@@ -116,9 +116,9 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function theConfigurationParameterIsSetTo(
         string $param,
-        bool $value
+        ?string $value
     ): void {
-        $this->setConfigParam($param, $value);
+        $this->setConfigParam($param, (bool)$value);
     }
 
 }
