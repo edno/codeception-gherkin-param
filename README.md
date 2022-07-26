@@ -21,7 +21,7 @@ scenario.
 ## Minimum Requirements
 
 - Codeception 3.x, 4.x, 5.x
-- PHP 7.4 - 8.1 (use release 2.0.6 for older PHP versions)
+- PHP 7.4 - 8.2 (use release 2.0.6 for older PHP versions)
 
 ## Installation
 
@@ -49,13 +49,13 @@ modules:
 
 ## Configuration
 
-The version 2 introduces two new configuration parameters for customizing runtime behaviour when the scenario parameters are invalid or not initialized (see PR#23 and PR#26).
+Version 2 introduces two new configuration parameters for customizing runtime behavior when the scenario parameters are invalid or not initialized (see PR#23 and PR#26).
 
-> By default **GherkinParam**  behaviour is to keep the parameter string unchanged when the replacement value for a parameter cannot be found, ie the parameter does not exist or is not accessible.
+> By default **GherkinParam**  behavior is to keep the parameter string unchanged when the replacement value for a parameter cannot be found, i.e., the parameter does not exist or is not accessible.
 
 ### `onErrorThrowException`
 
-If `true` then GherkinParam will throw a exception `GherkinParam` at runtime when a replacement value cannot be found for a parameter:
+If `true`, then GherkinParam will throw an exception `GherkinParam` at runtime when a replacement value cannot be found for a parameter:
 
 ```yaml
 modules:
@@ -68,7 +68,7 @@ modules:
 
 ### `onErrorNullable`
 
-If `true` then GherkinParam will set to `null` parameters for which a replacement value cannot be found:
+If `true`, then GherkinParam will set to `null` parameters for which a replacement value cannot be found:
 
 ```yaml
 modules:
@@ -79,13 +79,13 @@ modules:
 
 ## Usage
 
-Once installed you will be able to access variables stored using
+Once installed, you will be able to access variables stored using
 [Fixtures](https://codeception.com/docs/reference/Fixtures.html).
 
 ### Simple parameters
 
 In scenario steps, the variables can be accessed using the syntax `{{param}}`.
-While executing your features the variables will be automatically replaced by their value.
+While executing your features, the variables will be automatically replaced by their value.
 
 ### Array parameters
 
@@ -100,7 +100,7 @@ Note that the keyword **config:** is mandatory.
 
 ```gherkin
 Feature: Parametrize Gherkin Feature
-  In order to create dynamic Gherkin scenario
+  In order to create a dynamic Gherkin scenario
   As a tester
   I need to be able to share data between scenario steps
 
@@ -145,7 +145,7 @@ The steps definition in `AcceptanceTester.php` do not require any change
 
 ## Contributions
 
-Contributions, issues and feature requests are very welcome. If you are using this package and fixed a bug for yourself, please consider submitting a PR!
+Contributions, issues, and feature requests are very welcome. If you use this package and have fixed a bug for yourself, please consider submitting a PR!
 
 <a href="https://github.com/edno/codeception-gherkin-param/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=edno/codeception-gherkin-param" />
