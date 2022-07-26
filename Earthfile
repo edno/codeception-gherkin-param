@@ -1,3 +1,5 @@
+VERSION 0.6
+
 ARG version=8.0
 ARG vendor=./vendor/bin
 FROM php:$version-alpine
