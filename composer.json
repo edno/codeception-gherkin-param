@@ -48,4 +48,9 @@
       "pre-push": "earthly +all"
     }
   }
+  "config": {
+    "allow-plugins": {
+      "infection/extension-installer": true
+    }
+  }
 }
