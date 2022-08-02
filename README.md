@@ -10,10 +10,6 @@
 
 ---
 
-:mega:<strong>&nbsp;&nbsp;<a href="https://2mjv.short.gy/h5jOWn">This extension is looking for a new maintainer, click here.</a>&nbsp;&nbsp;</strong>:mega:
-
----
-
 The [Codeception](http://codeception.com/) module for supporting parameter notation
 in [Gherkin](https://codeception.com/docs/07-BDD)
 scenario.
