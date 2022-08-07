@@ -40,12 +40,7 @@ modules:
         - Codeception\Extension\GherkinParam
 ```
 
-> From version 2.0, **GherkinParam** is now a **module**.
-> If you are upgrading from 1.x to 2.x, then you'll have to update your Codeception configuration.
-
 ## Configuration
-
-Version 2 introduces two new configuration parameters for customizing runtime behavior when the scenario parameters are invalid or not initialized (see PR#23 and PR#26).
 
 > By default **GherkinParam**  behavior is to keep the parameter string unchanged when the replacement value for a parameter cannot be found, i.e., the parameter does not exist or is not accessible.
 
