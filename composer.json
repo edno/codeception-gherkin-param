@@ -30,7 +30,7 @@
     "infection/codeception-adapter": "^0.4",
     "infection/infection": "^0.26",
     "php-coveralls/php-coveralls": "^2.5",
-    "phpstan/phpstan": "^1.8",
+    "phpstan/phpstan": "^1.9",
     "phpstan/phpstan-deprecation-rules": "^1.0",
     "phpstan/phpstan-phpunit": "^1.2",
     "phpmd/phpmd": "^2.13",
