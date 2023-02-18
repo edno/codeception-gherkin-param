@@ -42,4 +42,9 @@
     <rule ref="Generic.Commenting.DocComment">
       <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
+        <properties>
+            <property name="maxLineLength" value="120" />
+        </properties>
+    </rule>
 </ruleset>

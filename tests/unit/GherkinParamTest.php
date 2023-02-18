@@ -17,6 +17,9 @@ class GherkinParamTest extends \Codeception\Test\Unit
     protected $module;
     protected $fixture;
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     protected function _before(): void
     {
         $moduleInstance = $this->getModule(
