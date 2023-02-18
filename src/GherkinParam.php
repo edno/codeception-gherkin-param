@@ -342,7 +342,7 @@ class GherkinParam extends \Codeception\Module
     /**
      * Parse a table node by mapping its parameters
      *
-     * @param \Behat\Gherkin\Node\TableNode<mixed> $tablenode table node
+     * @param \Behat\Gherkin\Node\TableNode<mixed> $tableNode table node
      *
      * @return \Behat\Gherkin\Node\TableNode<mixed> Returns valued table node
      */
