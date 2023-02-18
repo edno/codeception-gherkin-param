@@ -139,7 +139,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromParam(string $param)
+    protected function getValueFromParam(string $param)
     {
         $variable = null;
 
@@ -217,7 +217,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @return mixed Returns value if exists, else parameter {{name}}
      */
-    final protected function mapParametersToValues(
+    protected function mapParametersToValues(
         array $matches,
         array $values,
         string $param
@@ -249,7 +249,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @return mixed Returns parameter's value if exists, else null
      */
-    final protected function getValueFromConfigParam(
+    protected function getValueFromConfigParam(
         string $param
     ) {
         $value = null;
@@ -280,7 +280,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @return mixed Returns parameter's value if exists, else null
      */
-    final protected function getValueFromArrayParam(string $param)
+    protected function getValueFromArrayParam(string $param)
     {
         try {
             return $this->getValueFromArray($param);
@@ -303,7 +303,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromFixture(string $param)
+    protected function getValueFromFixture(string $param)
     {
         try {
             return Fixtures::get($param);
@@ -326,7 +326,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromArray(string $param)
+    protected function getValueFromArray(string $param)
     {
         $value = null;
 
@@ -346,7 +346,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @return \Behat\Gherkin\Node\TableNode<mixed> Returns valued table node
      */
-    final protected function parseTableNode(TableNode $tableNode)
+    protected function parseTableNode(TableNode $tableNode)
     {
         $prop = new ReflectionProperty(get_class($tableNode), 'table');
         $prop->setAccessible(true);
