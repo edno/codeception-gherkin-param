@@ -75,7 +75,7 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
                     ->mapParametersToValues(
                         [0,1,2,3,4],
                         [[0],[1],[2],[3],[4]],
-                        "test"
+                        'test'
                     );
             }
         );
@@ -90,8 +90,30 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
                     ->mapParametersToValues(
                         [0,1,2,3,4],
                         [],
-                        "test"
+                        'test'
                     );
+            }
+        );
+    }   
+
+    public function testGetValueFromFixtureWithExceptionOnIsSet(): void
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->getValueFromFixture('{{test}}');
+            }
+        );
+    }
+
+    public function testGetValueFromArrayParamWithExceptionOnIsSet(): void
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->getValueFromArrayParam('{{test[1]}}');
             }
         );
     }

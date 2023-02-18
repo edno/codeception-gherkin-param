@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @category Test
  * @package  GherkinParam
  * @author   Gregory Heitz <edno@edno.io>
- * @license  https://git.io/Juy0k Apache Licence
+ * @license  https://git.io/Juy0k Apache License
  * @link     https://packagist.org/packages/edno/codeception-gherkin-param
  */
 
@@ -33,6 +33,7 @@ use \Codeception\Configuration;
 use \Codeception\Step;
 use \Codeception\Lib\ModuleContainer;
 use \Codeception\Extension\GherkinParamException;
+use \Codeception\Exception\Warning;
 
 /**
  * GherkinParam extension main class
@@ -84,7 +85,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @var boolean
      * true: if parameter invalid then replacement value will be null
-     * false: default behaviour, ie replacement value is parameter {{name}}
+     * false: default behavior, ie replacement value is parameter {{name}}
      */
     private bool $_nullable = false;
 
@@ -283,7 +284,7 @@ class GherkinParam extends \Codeception\Module
     {
         try {
             return $this->getValueFromArray($param);
-        } catch (RuntimeException | TypeError $exception) {
+        } catch (Warning | RuntimeException | TypeError $exception) {
             if ($this->_throwException) {
                 throw new GherkinParamException();
             }
