@@ -8,8 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     env:
       XDEBUG_MODE: coverage
+    strategy:
+      matrix:
+        php-version: ['8.0', '8.1', '8.2']
 
     steps:
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+
     - uses: actions/checkout@v3
 
     - name: Validate composer.json and composer.lock
