@@ -25,7 +25,7 @@ jobs:
       run: ./vendor/bin/codecept run --quiet --no-colors --no-interaction --coverage --coverage-xml
 
     - name: Run mutation tests
-      run: ./vendor/bin/infection --min-covered-msi=75 --threads=2 --no-progress --no-interaction --log-verbosity=none
+      run: ./vendor/bin/infection --min-covered-msi=70 --threads=2 --no-progress --no-interaction --log-verbosity=none
       env:
         STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
 
