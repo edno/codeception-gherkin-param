@@ -28,9 +28,6 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
         $this->module = Mockery::mock($moduleInstance)
             ->shouldAllowMockingProtectedMethods()
             ->makePartial();
-
-        $this->module = Mockery::spy($moduleInstance)
-            ->shouldAllowMockingProtectedMethods();
     }
 
     public function testGetValueFromParamWithExceptionFromConfig(): void
