@@ -346,11 +346,11 @@ class GherkinParam extends \Codeception\Module
      *
      * @return \Behat\Gherkin\Node\TableNode<mixed> Returns valued table node
      */
-    final protected function parseTableNode(TableNode $tablenode)
+    final protected function parseTableNode(TableNode $tableNode)
     {
-        $prop = new ReflectionProperty(get_class($tablenode), 'table');
+        $prop = new ReflectionProperty(get_class($tableNode), 'table');
         $prop->setAccessible(true);
-        $table = $prop->getValue($tablenode);
+        $table = $prop->getValue($tableNode);
         foreach ($table as $i => $row) {
             foreach ($row as $j => $cell) {
                 $val = $this->getValueFromParam($cell);
@@ -358,10 +358,10 @@ class GherkinParam extends \Codeception\Module
                 $table[$i][$j] = $val;
             }
         }
-        $prop->setValue($tablenode, $table);
+        $prop->setValue($tableNode, $table);
         $prop->setAccessible(false);
 
-        return $tablenode;
+        return $tableNode;
     }
 
     /**
