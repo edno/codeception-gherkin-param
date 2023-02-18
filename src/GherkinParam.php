@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @category Test
  * @package  GherkinParam
  * @author   Gregory Heitz <edno@edno.io>
- * @license  https://git.io/Juy0k Apache Licence
+ * @license  https://git.io/Juy0k Apache License
  * @link     https://packagist.org/packages/edno/codeception-gherkin-param
  */
 
@@ -33,6 +33,7 @@ use \Codeception\Configuration;
 use \Codeception\Step;
 use \Codeception\Lib\ModuleContainer;
 use \Codeception\Extension\GherkinParamException;
+use \Codeception\Exception\Warning;
 
 /**
  * GherkinParam extension main class
@@ -84,7 +85,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @var boolean
      * true: if parameter invalid then replacement value will be null
-     * false: default behaviour, ie replacement value is parameter {{name}}
+     * false: default behavior, ie replacement value is parameter {{name}}
      */
     private bool $_nullable = false;
 
@@ -138,7 +139,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromParam(string $param)
+    protected function getValueFromParam(string $param)
     {
         $variable = null;
 
@@ -216,7 +217,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @return mixed Returns value if exists, else parameter {{name}}
      */
-    final protected function mapParametersToValues(
+    protected function mapParametersToValues(
         array $matches,
         array $values,
         string $param
@@ -248,7 +249,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @return mixed Returns parameter's value if exists, else null
      */
-    final protected function getValueFromConfigParam(
+    protected function getValueFromConfigParam(
         string $param
     ) {
         $value = null;
@@ -279,11 +280,11 @@ class GherkinParam extends \Codeception\Module
      *
      * @return mixed Returns parameter's value if exists, else null
      */
-    final protected function getValueFromArrayParam(string $param)
+    protected function getValueFromArrayParam(string $param)
     {
         try {
             return $this->getValueFromArray($param);
-        } catch (RuntimeException | TypeError $exception) {
+        } catch (Warning | RuntimeException | TypeError $exception) {
             if ($this->_throwException) {
                 throw new GherkinParamException();
             }
@@ -302,7 +303,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromFixture(string $param)
+    protected function getValueFromFixture(string $param)
     {
         try {
             return Fixtures::get($param);
@@ -325,7 +326,7 @@ class GherkinParam extends \Codeception\Module
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    final protected function getValueFromArray(string $param)
+    protected function getValueFromArray(string $param)
     {
         $value = null;
 
@@ -341,15 +342,15 @@ class GherkinParam extends \Codeception\Module
     /**
      * Parse a table node by mapping its parameters
      *
-     * @param \Behat\Gherkin\Node\TableNode<mixed> $tablenode table node
+     * @param \Behat\Gherkin\Node\TableNode<mixed> $tableNode table node
      *
      * @return \Behat\Gherkin\Node\TableNode<mixed> Returns valued table node
      */
-    final protected function parseTableNode(TableNode $tablenode)
+    protected function parseTableNode(TableNode $tableNode)
     {
-        $prop = new ReflectionProperty(get_class($tablenode), 'table');
+        $prop = new ReflectionProperty(get_class($tableNode), 'table');
         $prop->setAccessible(true);
-        $table = $prop->getValue($tablenode);
+        $table = $prop->getValue($tableNode);
         foreach ($table as $i => $row) {
             foreach ($row as $j => $cell) {
                 $val = $this->getValueFromParam($cell);
@@ -357,10 +358,10 @@ class GherkinParam extends \Codeception\Module
                 $table[$i][$j] = $val;
             }
         }
-        $prop->setValue($tablenode, $table);
+        $prop->setValue($tableNode, $table);
         $prop->setAccessible(false);
 
-        return $tablenode;
+        return $tableNode;
     }
 
     /**

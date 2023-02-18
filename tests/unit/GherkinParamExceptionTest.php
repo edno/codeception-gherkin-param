@@ -28,9 +28,14 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
         $this->module = Mockery::mock($moduleInstance)
             ->shouldAllowMockingProtectedMethods()
             ->makePartial();
+    }
 
-        $this->module = Mockery::spy($moduleInstance)
-            ->shouldAllowMockingProtectedMethods();
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
+    protected function _after(): void
+    {
+        Mockery::close();
     }
 
     public function testGetValueFromParamWithExceptionFromConfig(): void
@@ -75,7 +80,7 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
                     ->mapParametersToValues(
                         [0,1,2,3,4],
                         [[0],[1],[2],[3],[4]],
-                        "test"
+                        'test'
                     );
             }
         );
@@ -90,8 +95,30 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
                     ->mapParametersToValues(
                         [0,1,2,3,4],
                         [],
-                        "test"
+                        'test'
                     );
+            }
+        );
+    }   
+
+    public function testGetValueFromFixtureWithExceptionOnIsSet(): void
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->getValueFromFixture('{{test}}');
+            }
+        );
+    }
+
+    public function testGetValueFromArrayParamWithExceptionOnIsSet(): void
+    {
+        $this->assertThrows(
+            GherkinParamException::class, function () {
+                $this
+                    ->module
+                    ->getValueFromArrayParam('{{test[1]}}');
             }
         );
     }

@@ -27,6 +27,14 @@ class GherkinParamNullableTest extends \Codeception\Test\Unit
             ->shouldAllowMockingProtectedMethods();
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
+    protected function _after(): void
+    {
+        Mockery::close();
+    }
+
     public function testMapParametersToValuesWithExceptionOnIsArray(): void
     {
         $param = $this
