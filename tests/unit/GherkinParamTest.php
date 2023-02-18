@@ -1,6 +1,7 @@
 <?php
 
 use \Behat\Gherkin\Node\TableNode;
+use \Codeception\Step;
 
 /**
  * Happy path unit tests
@@ -21,23 +22,53 @@ class GherkinParamTest extends \Codeception\Test\Unit
         $moduleInstance = $this->getModule(
             'Codeception\Extension\GherkinParam'
         );
-        $this->module = Mockery::mock($moduleInstance)
-            ->shouldAllowMockingProtectedMethods()
-            ->makePartial();
 
-        $this->module = Mockery::spy($moduleInstance)
-            ->shouldAllowMockingProtectedMethods();
+        $this->module = Mockery::spy($moduleInstance);
+    }
+
+    protected function _after(): void
+    {
+        Mockery::close();
+    }
+
+    public function testBeforeStepCallsGetValueFromParamWhenStepParamIsString(): void
+    {
+        $step = new Step\Action('test', ['test']);
+
+        $this->module->_beforeStep($step);
+
+        $this->module->shouldHaveReceived('getValueFromParam', ['test']);
+    }
+
+    public function testBeforeStepCallsParseTableNodeWhenStepParamIsTableNode(): void
+    {
+        $param = new TableNode([1 => ['foo', 'bar', 'baz']]);
+        $step = new Step\Action('test', [$param]);
+
+        $this->module->_beforeStep($step);
+
+        $this->module->shouldHaveReceived('parseTableNode', [$param]);
+    }
+
+    public function testBeforeStepIteratesGetValueFromParamWhenStepParamIsArray(): void
+    {
+        $param = ['foo', 'bar', 'baz'];
+        $step = new Step\Action('test', [$param]);
+
+        $this->module->_beforeStep($step);
+
+        $this->module->shouldHaveReceived('getValueFromParam', ['foo']);
+        $this->module->shouldHaveReceived('getValueFromParam', ['bar']);
+        $this->module->shouldHaveReceived('getValueFromParam', ['baz']);
     }
 
     public function testParseTableNodeReturnsValuedTableNode(): void
     {
-        $input = new TableNode([1 => ["foo", "bar", "baz"]]);
+        $input = new TableNode([1 => ['foo', 'bar', 'baz']]);
 
-        $tableNode = $this
-            ->module
+        $tableNode = $this->module
             ->parseTableNode($input);
 
         $this->assertEquals($input, $tableNode);
     }
-
 }
