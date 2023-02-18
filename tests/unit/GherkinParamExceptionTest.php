@@ -30,6 +30,9 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
             ->makePartial();
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     protected function _after(): void
     {
         Mockery::close();

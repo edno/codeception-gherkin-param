@@ -26,6 +26,9 @@ class GherkinParamTest extends \Codeception\Test\Unit
         $this->module = Mockery::spy($moduleInstance);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     protected function _after(): void
     {
         Mockery::close();
