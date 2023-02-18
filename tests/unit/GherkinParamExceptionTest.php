@@ -30,6 +30,11 @@ class GherkinParamExceptionTest extends \Codeception\Test\Unit
             ->makePartial();
     }
 
+    protected function _after(): void
+    {
+        Mockery::close();
+    }
+
     public function testGetValueFromParamWithExceptionFromConfig(): void
     {
         $this->assertThrows(
