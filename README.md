@@ -1,7 +1,7 @@
 # Gherkin Param
 
 [![Latest Version](https://img.shields.io/packagist/v/edno/codeception-gherkin-param.svg)](https://packagist.org/packages/edno/codeception-gherkin-param)
-[![Build Status](https://img.shields.io/travis/com/edno/codeception-gherkin-param.svg)](https://app.travis-ci.com/github/edno/codeception-gherkin-param)
+![Build Status](https://img.shields.io/github/actions/workflow/status/edno/codeception-gherkin-param/run-tests.yml)
 [![Coverage Status](https://img.shields.io/coveralls/edno/codeception-gherkin-param.svg)](https://coveralls.io/github/edno/codeception-gherkin-param?branch=main)
 [![Mutation Score](https://img.shields.io/endpoint?label=mutation%20score&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fedno%2Fcodeception-gherkin-param%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/edno/codeception-gherkin-param/main)
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/edno/codeception-gherkin-param/main/LICENSE)
