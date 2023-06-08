@@ -2,6 +2,8 @@ name: Tests
 
 on: [push]
 
+permissions: read-all
+
 jobs:
   tests:
     name: Tests
