@@ -16,7 +16,11 @@ on:
     branches: [ main ]
   schedule:
     - cron: '18 16 * * 3'
-  
+
+permissions:
+  security-events: write
+  contents: read
+
 jobs:
   codacy-security-scan:
     name: Codacy Security Scan
