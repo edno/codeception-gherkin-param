@@ -16,12 +16,6 @@ on:
     branches: [ main ]
   schedule:
     - cron: '18 16 * * 3'
-    
-permissions:
-  actions: write
-  checks: write
-  pull-requests: read
-  statuses: write
   
 jobs:
   codacy-security-scan:
